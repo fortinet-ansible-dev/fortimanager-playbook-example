@@ -32,6 +32,8 @@ def get_purified_content(lines):
     return data
 
 even = True
+BRANCH='2.0.0'
+
 def print_metadata_in_html(fname, metadata):
     global even
     author_string = ''
@@ -46,7 +48,7 @@ def print_metadata_in_html(fname, metadata):
     if 'label' in metadata:
         for label in metadata['label']:
             label_string += '<code class="docutils literal notranslate"><span class="pre">%s</span></code>' % (label)
-    print(' <tr class="%s"><td><a target="_blank" href="https://raw.githubusercontent.com/fortinet-ansible-dev/fortimanager-playbook-example/master/output/%s">%s</a></td>' % ('row-even' if even else 'row-odd', fname, fname))
+    print(' <tr class="%s"><td><a target="_blank" href="https://raw.githubusercontent.com/fortinet-ansible-dev/fortimanager-playbook-example/%s/output/%s">%s</a></td>' % ('row-even' if even else 'row-odd', BRANCH, fname, fname))
     print(' <td><code ><span>%s</span></code></td>' % (metadata['desc'] if 'desc' in metadata else ''))
     print(' <td><code ><span class="pre">%s</span></code></td>' % (author_string) )
     print(' <td><code ><span class="pre">%s</span></code></td>' % (date_string) )
