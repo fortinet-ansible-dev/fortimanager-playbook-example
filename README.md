@@ -1,0 +1,1 @@
+# fortimanager-playbook-example
