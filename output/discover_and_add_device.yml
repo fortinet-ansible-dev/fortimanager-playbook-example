@@ -1,0 +1,51 @@
+- name: Add a FOS device to FMG
+  hosts: fortimanager01
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+    fos_user: 'admin'
+    fos_pass: 'password'
+    fos_ip: '192.168.190.151'
+  tasks:
+    - name: discover device
+      fmgr_dvm_cmd_discover_device:
+        bypass_validation: True
+        dvm_cmd_discover_device:
+            device:
+                adm_pass: '{{ fos_pass }}'
+                adm_usr: '{{ fos_user }}'
+                ip: '{{ fos_ip }}'
+      register: probed_device
+    - name: add device
+      fmgr_dvm_cmd_add_device:
+        bypass_validation: True
+        dvm_cmd_add_device:
+            adom: 'root'
+            flags:
+              - 'create_task'
+              - 'nonblocking'
+            device:
+                adm_usr: '{{ probed_device.meta.response_data.device.adm_usr }}'
+                adm_pass: '{{ probed_device.meta.response_data.device.adm_pass }}'
+                desc: 'The device is added via FortiManager Ansible'
+                ip: '{{ probed_device.meta.response_data.device.ip }}'
+                mgmt_mode: 'fmg'
+                name: '{{ probed_device.meta.response_data.device.name }}'
+                sn: '{{ probed_device.meta.response_data.device.sn }}'
+      register: installing_task
+    - name: poll the task
+      fmgr_fact:
+        facts:
+            selector: 'task_task'
+            params:
+                task: '{{installing_task.meta.response_data.taskid}}'
+      register: taskinfo
+      until: taskinfo.meta.response_data.percent == 100
+      retries: 30
+      delay: 5
+      failed_when: taskinfo.meta.response_data.state == 'error' and 'devsnexist' not in taskinfo.meta.response_data.line[0].detail
