@@ -1,0 +1,46 @@
+# Author: Link Zheng
+# Org: Fortinet
+# Date: 2020.09.11
+# Label: clone
+# Desc: Clone an Object in FortiManager
+- name: Demo of cloning objects in FortiManager
+  hosts: fortimanager01
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+    initial_vip_object: 'vip_object0'
+    cloned_vip_objects:
+        - name: 'vip_object1'
+          comment: 'vip_object1 is cloned!'
+        - name: 'vip_object2'
+          comment: 'vip_object2 is cloned!'
+
+  tasks:
+    - name: Create An VIP object
+      fmgr_firewall_vip:
+        adom: 'root'
+        state: 'present'
+        firewall_vip:
+            arp-reply: 'disable'
+            comment: 'The VIP is created via Ansible'
+            name: '{{ initial_vip_object }}'
+            protocol: 'tcp'
+            type: 'load-balance' 
+ 
+    - name: Clone an VIP object using fmgr_clone module.
+      fmgr_clone:
+        rc_succeeded: [-2]
+        clone:
+         selector: 'firewall_vip'
+         self:
+           adom: 'root'
+           vip: '{{ initial_vip_object }}'
+         target:
+           name: '{{ item.name }}'
+           comment: '{{ item.comment }}'
+      with_items: '{{ cloned_vip_objects }}'
+
