@@ -1,0 +1,47 @@
+- name: Delete first FOS devices from FMG In a specific adom
+  hosts: fortimanager01
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+    device_adom: 'root'
+  tasks:
+    - name: fetch all devices
+      fmgr_fact:
+        facts:
+            selector: 'dvmdb_device'
+            params:
+                adom: '{{ device_adom }}'
+                device: ''
+      register: alldevices
+    - when: alldevices.meta.response_data != []
+      debug:
+        msg:
+         - 'We are going to delete device: {{ alldevices.meta.response_data[0].name }}'
+         - 'IP of the device is: {{ alldevices.meta.response_data[0].ip }}'
+    - when: alldevices.meta.response_data != []
+      name: Create The Task To Delete The Device
+      fmgr_dvm_cmd_del_device:
+        dvm_cmd_del_device:
+            device: '{{ alldevices.meta.response_data[0].name }}'
+            adom: '{{ device_adom }}'
+            flags:
+             - 'create_task'
+             - 'nonblocking'
+      register: uninstalling_task
+    - when: alldevices.meta.response_data != []
+      name: poll the task
+      fmgr_fact:
+        facts:
+            selector: 'task_task'
+            params:
+                task: '{{uninstalling_task.meta.response_data.taskid}}'
+      register: taskinfo
+      until: taskinfo.meta.response_data.percent == 100
+      retries: 30
+      delay: 5
+      failed_when: taskinfo.meta.response_data.state == 'error'

@@ -1,0 +1,34 @@
+- name: Commit config to real device
+  hosts: fortimanager01
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+    device_adom: 'root'
+    script_name: 'FooScript'
+    device_name: 'CustomHostName'
+    device_vdom: 'root'
+  tasks:
+    - name: invoke the task
+      fmgr_securityconsole_install_device:
+        securityconsole_install_device:
+            adom: '{{ device_adom }}'
+            scope:
+             - name: '{{ device_name }}'
+               vdom: '{{ device_vdom }}'
+      register: installing_task
+    - name: Inspect the Task Status
+      fmgr_fact:
+        facts:
+            selector: 'task_task'
+            params:
+                task: '{{installing_task.meta.response_data.task}}'
+      register: taskinfo
+      until: taskinfo.meta.response_data.percent == 100
+      retries: 30
+      delay: 3
+      failed_when: taskinfo.meta.response_data.state == 'error'

@@ -9,6 +9,8 @@ def get_metadata(lines):
     for line in lines:
         stripped_line = line.rstrip('\n')
         stripped_line = stripped_line.strip(' ')
+        if not len(stripped_line):
+            continue
         if stripped_line[0] != '#':
             break
         stripped_line = stripped_line[1:]
