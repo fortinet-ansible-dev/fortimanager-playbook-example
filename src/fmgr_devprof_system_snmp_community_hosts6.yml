@@ -1,0 +1,28 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: snmp
+# Desc: Configure IPv6 SNMP managers
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 SNMP managers.
+     fmgr_devprof_system_snmp_community_hosts6:
+        bypass_validation: False
+        adom: ansible
+        devprof: 'ansible-test' # system template name, could find it in FortiManager UI: Device Manager --> Provisioning Templates --> System Templates
+        community: '1' # id
+        state: present
+        devprof_system_snmp_community_hosts6:
+           ha-direct: enable
+           host-type: any
+           id: 1
+          #  ipv6: <value of string>
+          #  source-ipv6: <value of string>

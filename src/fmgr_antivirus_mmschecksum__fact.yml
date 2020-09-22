@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.21
+# Label: antivirus, mms-checksum, FortiCarrier
+# Desc: Retrieve all the mms-checksums 
+
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the mms-checksums 
+     fmgr_fact:
+       facts:
+           selector: 'antivirus_mmschecksum'
+           params:
+               adom: 'FortiCarrier' # This is FOC-only object, data will only be returned under FortiCarrier adom
+               mms-checksum: ""

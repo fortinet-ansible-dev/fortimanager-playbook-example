@@ -1,0 +1,42 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: script
+# Desc: Script table
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Script table.
+     fmgr_dvmdb_script:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        dvmdb_script:
+           content: 'ansiblt-test'
+          #  desc: <value of string>
+          #  filter_build: <value of integer>
+          #  filter_device: <value of integer>
+          #  filter_hostname: <value of string>
+          #  filter_ostype: <value in [unknown, fos]>
+          #  filter_osver: <value in [unknown, 4.00, 5.00]>
+          #  filter_platform: <value of string>
+          #  filter_serial: <value of string>
+          #  modification_time: <value of string>
+           name: 'ansible-test'
+          #  script_schedule:
+          #    -
+          #       #  datetime: <value of string>
+          #       #  day_of_week: <value in [unknown, sun, mon, ...]>
+          #       #  device: <value of integer>
+          #        name: 'ansible-script'
+          #        run_on_db: disable
+          #        type: auto
+           target: device_database
+           type: cli

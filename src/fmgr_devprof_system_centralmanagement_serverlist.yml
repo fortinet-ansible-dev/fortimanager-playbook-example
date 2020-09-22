@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: server
+# Desc: Additional severs that the FortiGate can use for updates (for AV, IPS, updates) and ratings (for web filter and antispam ratings) servers
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Additional severs that the FortiGate can use for updates (for AV, IPS, updates) and ratings (for web filter and antispam ratings) servers.
+     fmgr_devprof_system_centralmanagement_serverlist:
+        adom: ansible
+        devprof: 'ansible-test' # system template name, could find it in FortiManager UI: Device Manager --> Provisioning Templates --> System Templates
+        state: present
+        devprof_system_centralmanagement_serverlist:
+           addr-type: ipv4
+          #  fqdn: <value of string>
+           id: 1
+           server-address: '222.222.211.111'
+          #  server-address6: <value of string>
+           server-type:
+             - update
+             - rating

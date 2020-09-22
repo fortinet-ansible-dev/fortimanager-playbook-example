@@ -1,0 +1,52 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: firewall, IPv4, group
+# Desc: Configure IPv4 address groups
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 address groups.
+     fmgr_firewall_addrgrp:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_addrgrp:
+           allow-routing: disable
+           color: 0
+          #  comment: 'ansible-comment'
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        allow-routing: <value in [disable, enable]>
+          #        color: <value of integer>
+          #        comment: <value of string>
+          #        exclude: <value in [disable, enable]>
+          #        exclude-member: <value of string>
+          #        member: <value of string>
+          #        tags: <value of string>
+          #        uuid: <value of string>
+          #        visibility: <value in [disable, enable]>
+           member: 'ansible-test' # IPv4 address name
+           name: 'ansible-addrgrp4' # could not the same with other group, adress name, including IPv6 group and address 
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+          #  uuid: <value of string>
+           visibility: disable

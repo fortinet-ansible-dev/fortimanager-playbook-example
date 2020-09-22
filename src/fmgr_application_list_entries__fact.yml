@@ -1,0 +1,25 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: application
+# Desc:  Retrieve all the entries in application list
+
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the entries in application list
+     fmgr_fact:
+       facts:
+           selector: 'application_list_entries'
+           params:
+               adom: 'ansible'
+               list: 'ansible-test' # name
+               entries: ''
