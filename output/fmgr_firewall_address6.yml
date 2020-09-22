@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 firewall addresses.
+     fmgr_firewall_address6:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_address6:
+           host-type: any #<value in [any, specific]>
+           ip6: '::/55'
+           name: 'ansible-test'
+           visibility: disable

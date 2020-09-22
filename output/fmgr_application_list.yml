@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure application control lists.
+     fmgr_application_list:
+        adom: ansible
+        state: present
+        application_list:
+           app-replacemsg: enable
+           comment: 'ansible-test-comment'
+           deep-app-inspection: enable
+           extended-log: disable
+           name: 'ansible-test'
+           other-application-action: pass
+           other-application-log: disable
+           unknown-application-action: pass
+           unknown-application-log: disable
