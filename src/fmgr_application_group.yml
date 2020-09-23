@@ -1,0 +1,25 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.21
+# Label: application
+# Desc: Configure firewall application groups
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure firewall application groups.
+     fmgr_application_group:
+        adom: ansible
+        state: present
+        application_group:
+          #  application: 1
+          #  category: 2
+           comment: 'ansible-test-comment'
+           name: 'ansible-test'
+           type: application #<value in [application, category]>

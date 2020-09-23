@@ -1,0 +1,70 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: application
+# Desc: Configure application control lists
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure application control lists.
+     fmgr_application_list:
+        adom: ansible
+        state: present
+        application_list:
+           app-replacemsg: enable
+           comment: 'ansible-test-comment'
+           deep-app-inspection: enable
+          #  entries:
+          #    -
+          #        action: block
+          #       #  application: 
+          #        behavior: 'all'
+          #        category: [2,6]
+          #        id: 5
+          #        log: enable
+          #        log-packet: disable
+          #        popularity:
+          #          - 1
+          #          - 2
+          #          - 3
+          #          - 4
+          #          - 5
+          #        protocols: 'all'
+          #        quarantine: <value in [none, attacker]>
+          #        quarantine-expiry: <value of string>
+          #        quarantine-log: <value in [disable, enable]>
+          #        rate-count: <value of integer>
+          #        rate-duration: <value of integer>
+          #        rate-mode: <value in [periodical, continuous]>
+          #        rate-track: <value in [none, src-ip, dest-ip, ...]>
+          #        risk: <value of integer>
+          #        session-ttl: <value of integer>
+          #        shaper: <value of string>
+          #        shaper-reverse: <value of string>
+          #        sub-category: <value of integer>
+          #        technology: <value of string>
+          #        vendor: <value of string>
+           extended-log: disable
+           name: 'ansible-test'
+          #  options:
+          #    - allow-dns
+          #    - allow-icmp
+          #    - allow-http
+          #    - allow-ssl
+          #    - allow-quic
+           other-application-action: pass
+           other-application-log: disable
+          #  p2p-black-list:
+          #    - skype
+          #    - edonkey
+          #    - bittorrent
+          #  replacemsg-group: <value of string>
+           unknown-application-action: pass
+           unknown-application-log: disable

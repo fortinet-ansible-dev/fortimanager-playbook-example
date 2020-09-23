@@ -1,0 +1,31 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.21
+# Label: antivirus, profile
+# Desc: Configure AntiVirus profiles
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure AntiVirus profiles.
+     fmgr_antivirus_profile:
+        adom: ansible
+        state: present
+        antivirus_profile:
+           analytics-db: disable
+           analytics-max-upload: 20
+           av-block-log: disable
+           av-virus-log: disable
+           comment: 'test comment'
+           extended-log: disable
+           ftgd-analytics: disable
+           inspection-mode: proxy
+           mobile-malware-db: disable
+           name: 'antivirus-profile'
+           scan-mode: quick

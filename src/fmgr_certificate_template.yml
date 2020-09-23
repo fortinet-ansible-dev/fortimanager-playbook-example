@@ -1,0 +1,35 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: certificate 
+# Desc: Add, update, or delete certificate template
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: no description
+     fmgr_certificate_template:
+        adom: ansible
+        state: present
+        certificate_template:
+          #  city: <value of string>
+          #  country: <value of string>
+           digest-type: sha1
+          #  email: <value of string>
+           id-type: host-ip
+           key-size: 512
+           key-type: rsa
+           name: 'ansible-test'
+          #  organization: <value of string>
+          #  organization-unit: <value of string>
+           scep-password: 'fortinet1'
+          #  scep-server: <value of string>
+          #  state: <value of string>
+          #  subject-name: <value of string>
+           type: external

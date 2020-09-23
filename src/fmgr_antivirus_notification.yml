@@ -1,0 +1,27 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.21
+# Label: antivirus, notification, FortiCarrier
+# Desc: Configure AntiVirus notification lists.
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure AntiVirus notification lists.
+     fmgr_antivirus_notification:
+        adom: FortiCarrier
+        state: present
+        antivirus_notification:
+           entries:
+             -
+                 name: 'notification-entry'
+                 prefix: enable
+                 status: enable
+           id: 1
+           name: 'notifiction-test'

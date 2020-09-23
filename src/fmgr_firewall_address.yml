@@ -1,0 +1,94 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: firewall, IPv4
+# Desc: Configure IPv4 addresses
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 addresses.
+     fmgr_firewall_address:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_address:
+           allow-routing: disable
+           associated-interface: any
+          #  cache-ttl: <value of integer>
+          #  color: <value of integer>
+          #  comment: <value of string>
+          #  country: <value of string>
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        allow-routing: <value in [disable, enable]>
+          #        associated-interface: <value of string>
+          #        cache-ttl: <value of integer>
+          #        color: <value of integer>
+          #        comment: <value of string>
+          #        country: <value of string>
+          #        end-ip: <value of string>
+          #        end-mac: <value of string>
+          #        epg-name: <value of string>
+          #        filter: <value of string>
+          #        fqdn: <value of string>
+          #        interface: <value of string>
+          #        obj-id: <value of string>
+          #        organization: <value of string>
+          #        policy-group: <value of string>
+          #        sdn: <value in [aci, aws, nsx, ...]>
+          #        sdn-addr-type: <value in [private, public, all]>
+          #        sdn-tag: <value of string>
+          #        start-ip: <value of string>
+          #        start-mac: <value of string>
+          #        subnet: <value of string>
+          #        subnet-name: <value of string>
+          #        tags: <value of string>
+          #        tenant: <value of string>
+          #        type: <value in [ipmask, iprange, fqdn, ...]>
+          #        url: <value of string>
+          #        uuid: <value of string>
+          #        visibility: <value in [disable, enable]>
+          #        wildcard: <value of string>
+          #        wildcard-fqdn: <value of string>
+          #  end-ip: <value of string>
+          #  epg-name: <value of string>
+          #  filter: <value of string>
+          #  fqdn: <value of string>
+          #  list:
+          #    -
+          #        ip: <value of string>
+           name: 'ansible-test'
+          #  obj-id: <value of string>
+          #  organization: <value of string>
+          #  policy-group: <value of string>
+          #  sdn: <value in [aci, aws, nsx, ...]>
+          #  sdn-tag: <value of string>
+          #  start-ip: <value of string>
+          #  subnet: <value of string>
+          #  subnet-name: <value of string>
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+          #  tenant: <value of string>
+          #  type: fqdn #<value in [ipmask, iprange, fqdn, ...]>
+          #  uuid: <value of string>
+           visibility: disable
+          #  wildcard: <value of string>
+          #  wildcard-fqdn: <value of string>

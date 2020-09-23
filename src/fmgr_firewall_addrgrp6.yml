@@ -1,0 +1,48 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: firewall, IPv6, group
+# Desc: Configure IPv6 address groups
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 address groups.
+     fmgr_firewall_addrgrp6:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_addrgrp6:
+           color: 0
+           comment: 'ansible-comment'
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        color: <value of integer>
+          #        comment: <value of string>
+          #        member: <value of string>
+          #        tags: <value of string>
+          #        uuid: <value of string>
+          #        visibility: <value in [disable, enable]>
+           member: 'ansible-test' # IPv6 address name
+           name: 'ansible-addrgrp6' # could not the same with other group, adress name, including IPv4 group and address
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+          #  uuid: <value of string>
+           visibility: enable

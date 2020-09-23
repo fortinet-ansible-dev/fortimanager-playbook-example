@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: application
+# Desc: Application parameters
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Application parameters.
+     fmgr_application_list_entries_parameters:
+        adom: ansible
+        list: 'ansible-test1' # name
+        entries: '1' # id
+        state: present
+        application_list_entries_parameters:
+           id: 1
+           value: 'ansible-test-parameter2'

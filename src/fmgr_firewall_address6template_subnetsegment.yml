@@ -1,0 +1,34 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: firewall, IPv6
+# Desc: IPv6 subnet segments
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: IPv6 subnet segments.
+     fmgr_firewall_address6template_subnetsegment:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        address6-template: 'ansible-name' # name
+        state: present
+        firewall_address6template_subnetsegment:
+           bits: 2
+           exclusive: enable
+           id: 1
+           name: 'ansible-name-sub'
+           values:
+             -
+                 name: 'ansible-name-val'
+                 value: 'ansible'

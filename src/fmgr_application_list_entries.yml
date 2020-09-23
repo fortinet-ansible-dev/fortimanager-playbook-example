@@ -1,0 +1,54 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: application
+# Desc: Application list entries
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Application list entries.
+     fmgr_application_list_entries:
+        adom: ansible
+        list: 'ansible-test' # name
+        state: present
+        application_list_entries:
+           action: pass
+          #  application: 
+           behavior: 'all'
+           category: '2'
+           id: 1
+           log: enable
+           log-packet: enable
+          #  parameters:
+          #    -
+          #        id: <value of integer>
+          #        value: <value of string>
+          #  per-ip-shaper: 'ansible-test-shaper'
+          #  popularity:
+          #    - 1
+          #    - 2
+          #    - 3
+          #    - 4
+          #    - 5
+           protocols: 'all'
+          #  quarantine: <value in [none, attacker]>
+          #  quarantine-expiry: <value of string>
+          #  quarantine-log: <value in [disable, enable]>
+          #  rate-count: <value of integer>
+          #  rate-duration: <value of integer>
+          #  rate-mode: <value in [periodical, continuous]>
+          #  rate-track: <value in [none, src-ip, dest-ip, ...]>
+          #  risk: <value of integer>
+          #  session-ttl: <value of integer>
+          #  shaper: <value of string>
+          #  shaper-reverse: <value of string>
+          #  sub-category: <value of integer>
+          #  technology: <value of string>
+          #  vendor: <value of string>

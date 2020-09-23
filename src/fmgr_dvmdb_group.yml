@@ -1,0 +1,26 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: group
+# Desc: Device group table
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Device group table.
+     fmgr_dvmdb_group:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        dvmdb_group:
+           desc: 'ansible-test'
+          #  meta fields: <value of string>
+           name: 'ansible-test'
+           os_type: fos
+           type: normal

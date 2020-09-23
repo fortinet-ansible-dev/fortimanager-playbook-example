@@ -1,0 +1,25 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: firewall, IPv4, group
+# Desc: Retrieve all the taggings in the IPv4 address group
+
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the taggings in the IPv4 address group
+     fmgr_fact:
+       facts:
+           selector: 'firewall_addrgrp_tagging'
+           params:
+               adom: 'ansible'
+               addrgrp: 'ansible-addrgrp4' # name
+               tagging: ''

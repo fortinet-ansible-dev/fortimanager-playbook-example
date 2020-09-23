@@ -1,0 +1,27 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: DNS
+# Desc: DNS domain filter entries
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: DNS domain filter entries.
+     fmgr_dnsfilter_domainfilter_entries:
+        bypass_validation: False
+        adom: ansible
+        domain-filter: '1' # id
+        state: present
+        dnsfilter_domainfilter_entries:
+           action: allow
+          #  domain: <value of string>
+           id: 1
+           status: disable
+           type: simple

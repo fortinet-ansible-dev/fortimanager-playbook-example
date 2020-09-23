@@ -1,0 +1,28 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.21
+# Label: antivirus, mms-checksum, FortiCarrier
+# Desc: Configure MMS content checksum list.
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure MMS content checksum list.
+     fmgr_antivirus_mmschecksum:
+        adom: "FortiCarrier" 
+        state: present
+        antivirus_mmschecksum:
+           comment: 'test-comment'
+           entries:
+             -
+                 checksum: "test_checksum"
+                 name: "entries-name"
+                 status: disable
+           id: 1
+           name: "checksum-name"

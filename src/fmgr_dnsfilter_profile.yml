@@ -1,0 +1,32 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.22
+# Label: DNS
+# Desc: Configure DNS domain filter profiles
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure DNS domain filter profiles.
+     fmgr_dnsfilter_profile:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        dnsfilter_profile:
+           block-action: redirect
+           block-botnet: disable
+           comment: 'ansible-test-comment'
+          #  external-ip-blocklist: <value of string>
+           log-all-domain: disable
+           name: 'ansible-test'
+          #  redirect-portal: <value of string>
+          #  safe-search: <value in [disable, enable]>
+          #  sdns-domain-log: <value in [disable, enable]>
+          #  sdns-ftgd-err-log: <value in [disable, enable]>
+          #  youtube-restrict: <value in [strict, moderate]>
