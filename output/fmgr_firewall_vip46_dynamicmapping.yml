@@ -1,0 +1,25 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv4 to IPv6 virtual IPs
+     fmgr_firewall_vip46_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        vip46: 'ansible-test-vip46' # name
+        state: present
+        firewall_vip46_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           arp-reply: disable
+           color: 1
+           comment: 'ansible-comment'
+           id: 1
+           ldb-method: static #<value in [static, round-robin, weighted, ...]>

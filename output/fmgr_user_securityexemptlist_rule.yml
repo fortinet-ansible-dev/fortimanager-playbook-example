@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure rules for exempting users from captive portal authentication.
+     fmgr_user_securityexemptlist_rule:
+        bypass_validation: False
+        adom: ansible
+        security-exempt-list: ansible-test-security # name
+        state: present
+        user_securityexemptlist_rule:
+           id: 1
+           service: ALL
+           srcaddr: ''

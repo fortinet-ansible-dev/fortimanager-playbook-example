@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Port ranges in the custom entry.
+     fmgr_firewall_internetservicecustom_entry_portrange:
+        bypass_validation: False
+        adom: ansible
+        internet-service-custom: 'ansible-test' # name
+        entry: '1' # id
+        state: present
+        firewall_internetservicecustom_entry_portrange:
+           end-port: 6
+           id: 1
+           start-port: 1

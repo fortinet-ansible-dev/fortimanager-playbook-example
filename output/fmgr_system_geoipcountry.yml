@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure geoip-countries
+     fmgr_system_geoipcountry:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        system_geoipcountry:
+           id: 1
+           name: ansible-test-geo

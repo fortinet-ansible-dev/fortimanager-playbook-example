@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Config object tagging.
+     fmgr_firewall_proxyaddress_tagging:
+        bypass_validation: False
+        adom: ansible
+        proxy-address: 'ansible-test' # name
+        state: present
+        firewall_proxyaddress_tagging:
+           category: 'ansible-category'
+           name: 'ansible-test'
+           tags: 'ansible2'

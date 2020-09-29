@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure Fortinet Single Sign On (FSSO) agents.
+     fmgr_user_fsso:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        user_fsso:
+           name: ansible-test-fsso
+           password: fortinet
+           port: 9000
+           server: ansible

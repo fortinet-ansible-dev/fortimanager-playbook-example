@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings
+     fmgr_user_device_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        device: ansible-test-device # alias
+        state: present
+        user_device_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           category: none #<value in [none, android-device, blackberry-device, ...]>
+           comment: ansible-comment
+           type: iphone #<value in [ipad, iphone, gaming-console, ...]>

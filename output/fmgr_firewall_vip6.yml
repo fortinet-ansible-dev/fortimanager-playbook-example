@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure virtual IP for IPv6.
+     fmgr_firewall_vip6:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_vip6:
+           arp-reply: disable
+           color: 1
+           comment: 'ansible-comment'
+           id: 1
+           name: 'ansible-test-vip6'

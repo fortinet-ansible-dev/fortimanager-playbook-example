@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SSL/TLS cipher suites to offer to a server, ordered by priority.
+     fmgr_firewall_vip_sslserverciphersuites:
+        bypass_validation: False
+        adom: ansible
+        vip: 'ansible-test-vip' # name
+        state: absent
+        firewall_vip_sslserverciphersuites:
+           cipher: 'TLS-RSA-WITH-RC4-128-MD5' #<value in [TLS-RSA-WITH-RC4-128-MD5, TLS-RSA-WITH-RC4-128-SHA, TLS-RSA-WITH-DES-CBC-SHA, ...]>
+           priority: 4
+           versions:
+             - ssl-3.0
+             - tls-1.0
+             - tls-1.1

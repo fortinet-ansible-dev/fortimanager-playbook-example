@@ -1,0 +1,24 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: IMSI.
+     fmgr_firewall_gtp_imsi:
+        bypass_validation: False
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_imsi:
+           action: allow #<value in [allow, deny]>
+           apnmember: ''
+           id: 1
+           msisdn-prefix: 'ansible'
+           selection-mode:
+             - ms
+             - net
+             - vrf

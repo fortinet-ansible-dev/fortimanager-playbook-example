@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Table of IP ranges assigned to country.
+     fmgr_system_geoipoverride_iprange:
+        bypass_validation: False
+        adom: ansible
+        geoip-override: ansible-test-geoipoverride # name
+        state: present
+        system_geoipoverride_iprange:
+           end-ip: 222.222.222.25
+           id: 1
+           start-ip: 222.222.222.2

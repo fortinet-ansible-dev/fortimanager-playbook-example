@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Anomaly name.
+     fmgr_pkg_firewall_dospolicy_anomaly:
+        bypass_validation: False
+        adom: ansible
+        pkg: ansible # package name
+        DoS-policy: 1 # policyid
+        state: present
+        pkg_firewall_dospolicy_anomaly:
+           action: pass #<value in [pass, block, proxy]>
+           log: enable
+           name: ansible-test-anomaly
+           quarantine: none #<value in [none, attacker, both, ...]>
+           status: disable

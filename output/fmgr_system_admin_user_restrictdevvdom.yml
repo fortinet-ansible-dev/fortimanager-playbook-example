@@ -1,0 +1,16 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Restricted to these devices/VDOMs.
+     fmgr_system_admin_user_restrictdevvdom:
+        bypass_validation: False
+        user: ansible-test # userid
+        state: present
+        system_admin_user_restrictdevvdom:
+           dev-vdom: FGT_AWS

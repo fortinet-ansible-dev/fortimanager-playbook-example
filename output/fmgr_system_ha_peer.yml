@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Peer.
+     fmgr_system_ha_peer:
+        bypass_validation: False
+        state: present
+        system_ha_peer:
+           id: 3
+           ip: '11.11.11.5' # Required, could not be 0.0.0.0
+           serial-number: FMG-VM0000000003 # need a valid serial number
+           status: disable

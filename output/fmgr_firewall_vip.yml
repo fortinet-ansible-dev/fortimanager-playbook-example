@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure virtual IP for IPv4.
+     fmgr_firewall_vip:
+        bypass_validation: True
+        adom: ansible
+        state: present
+        firewall_vip:
+           arp-reply: disable #<value in [disable, enable]>
+           color: 1
+           comment: 'ansible-comment'
+           id: 1
+           name: 'ansible-test-vip'
+           protocol: tcp #<value in [tcp, udp, sctp, ...]>
+           type: load-balance #<value in [static-nat, load-balance, server-load-balance, ...]>

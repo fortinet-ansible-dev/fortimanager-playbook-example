@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: List of SQL index fields.
+     fmgr_system_sql_customindex:
+        bypass_validation: False
+        state: present
+        system_sql_customindex:
+           case-sensitive: disable
+           device-type: FortiGate #<value in [FortiGate, FortiManager, FortiClient, ...]>
+           id: 1
+           index-field: srcip
+           log-type: attack #<value in [none, app-ctrl, attack, ...]>

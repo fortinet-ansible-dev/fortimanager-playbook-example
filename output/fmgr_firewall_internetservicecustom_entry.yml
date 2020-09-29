@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Entries added to the Internet Service database and custom database.
+     fmgr_firewall_internetservicecustom_entry:
+        bypass_validation: False
+        adom: ansible
+        internet-service-custom: 'ansible-test' # name
+        state: present
+        firewall_internetservicecustom_entry:
+           dst: 'ansible'
+           id: 1
+           protocol: 2

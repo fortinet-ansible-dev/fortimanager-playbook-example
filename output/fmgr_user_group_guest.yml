@@ -1,0 +1,21 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Guest User.
+     fmgr_user_group_guest:
+        bypass_validation: False
+        adom: ansible
+        group: ansible-test-group # name
+        state: present
+        user_group_guest:
+           comment: ansible-comment
+           email: test@fortinet.com
+           name: ansible-test-guest
+           password: fortinet
+           user-id: Email

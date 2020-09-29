@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 IP pools.
+     fmgr_firewall_ippool:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_ippool:
+           comments: 'ansible-comment'
+           endip: '222.222.222.254'
+           name: 'ansible-test'
+           startip: '222.222.222.0'
+           type: overload #<value in [overload, one-to-one, fixed-port-range, ...]>

@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: LDAP server entry configuration.
+     fmgr_system_admin_ldap:
+        bypass_validation: False
+        state: present
+        system_admin_ldap:
+           adom:
+             -
+                 adom-name: ansible
+           name: ansible-test-ldap
+           password: Fortinet
+           port: 390
+           server: ansible
+           type: regular #<value in [simple, anonymous, regular]>
+           username: ansible-username

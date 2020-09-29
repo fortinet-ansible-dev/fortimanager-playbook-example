@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Select the real servers that this server load balancing VIP will distribute traffic to.
+     fmgr_firewall_vip6_realservers:
+        bypass_validation: False
+        adom: ansible
+        vip6: 'ansible-test-vip6' # name
+        state: present
+        firewall_vip6_realservers:
+           healthcheck: disable #<value in [disable, enable, vip]>
+           id: 1
+           status: active #<value in [active, standby, disable]>

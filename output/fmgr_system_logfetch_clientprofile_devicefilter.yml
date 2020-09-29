@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: List of device filter.
+     fmgr_system_logfetch_clientprofile_devicefilter:
+        bypass_validation: False
+        client-profile: 1 # id
+        state: present
+        system_logfetch_clientprofile_devicefilter:
+           adom: root
+           device: terraform # need a valid device name
+           id: 1
+           vdom: terraform # need a valid vdom name

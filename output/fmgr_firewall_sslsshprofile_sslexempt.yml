@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Servers to exempt from SSL inspection.
+     fmgr_firewall_sslsshprofile_sslexempt:
+        bypass_validation: False
+        adom: ansible
+        ssl-ssh-profile: 'ansible-test' # name
+        state: present
+        firewall_sslsshprofile_sslexempt:
+           id: 1
+           type: address6 #<value in [fortiguard-category, address, address6, ...]>

@@ -1,0 +1,24 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure custom application signatures.
+     fmgr_application_custom:
+        adom: ansible
+        state: present
+        application_custom:
+           behavior: 'ansible-test1'
+           category: 'ansible-test1'
+           comment: 'ansble-test'
+           id: 0
+           name: 'ansible-test1'
+           protocol: 'ansble-test1'
+           signature: 'ansble-test1'
+           tag: 'ansble-test-tag'
+           technology: 'ansble-test'
+           vendor: 'ansble-test-vendor'

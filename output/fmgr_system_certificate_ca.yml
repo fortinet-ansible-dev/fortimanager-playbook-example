@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: CA certificate.
+     fmgr_system_certificate_ca:
+        bypass_validation: True
+        state: present
+        system_certificate_ca:
+           ca: [
+                    ""
+                ] # need a valid certificate, eg. "\"-----BEGIN CERTIFICATE-----\nMIID1TCCAr2g.........nEHEkoy4hw==\n-----END CERTIFICATE-----\""
+           comment: ansible-comment
+           name: ansible-test-ca

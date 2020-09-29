@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Replacement message table entries.
+     fmgr_system_replacemsggroup_devicedetectionportal:
+        bypass_validation: False
+        adom: ansible
+        replacemsg-group: ansible-test # name
+        state: present
+        system_replacemsggroup_devicedetectionportal:
+           buffer: ansible-buffer
+           format: none #<value in [none, text, html, ...]>
+           header: http #<value in [none, http, 8bit]>
+           msg-type: ansible-msgtype # required

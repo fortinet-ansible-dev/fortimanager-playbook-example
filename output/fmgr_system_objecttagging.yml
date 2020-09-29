@@ -1,0 +1,26 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure object tagging.
+     fmgr_system_objecttagging:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        system_objecttagging:
+           address: optional #<value in [optional, mandatory, disable]>
+           category: 'ansible-category' # need a valid category name
+           color: 0
+           device: optional #<value in [optional, mandatory, disable]>
+           interface: optional #<value in [optional, mandatory, disable]>
+           multiple: enable
+           tags: [
+             'ansible-category', 
+             'ansible', 
+             'ansible1'
+             ]

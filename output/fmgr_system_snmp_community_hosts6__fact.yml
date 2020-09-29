@@ -1,0 +1,18 @@
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the allow hosts for IPv6
+     fmgr_fact:
+       facts:
+           selector: 'system_snmp_community_hosts6'
+           params:
+               community: '1' # id
+               hosts6: ''

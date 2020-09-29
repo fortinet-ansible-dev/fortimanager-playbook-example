@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv4 virtual IP groups
+     fmgr_firewall_vipgrp_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        vipgrp: 'ansible-test-vipgrp' # name
+        state: present
+        firewall_vipgrp_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           color: 1
+           comments: 'ansible-comment'
+           member: 'ansible-test-vip'

@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Log-fetch client profile settings.
+     fmgr_system_logfetch_clientprofile:
+        bypass_validation: False
+        state: present
+        system_logfetch_clientprofile:
+           client-adom: ansible
+           data-range: custom #<value in [custom]>
+           id: 1
+           index-fetch-logs: enable
+           name: ansible-test-clientprofile
+           password: fortinet
+           server-ip: '222.222.22.25'
+           user: ansible
