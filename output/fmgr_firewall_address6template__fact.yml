@@ -1,0 +1,18 @@
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the IPv6 address templates
+     fmgr_fact:
+       facts:
+           selector: 'firewall_address6template'
+           params:
+               adom: 'ansible'
+               address6-template: ''

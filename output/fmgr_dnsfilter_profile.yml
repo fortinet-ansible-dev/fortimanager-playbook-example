@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure DNS domain filter profiles.
+     fmgr_dnsfilter_profile:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        dnsfilter_profile:
+           block-action: redirect
+           block-botnet: disable
+           comment: 'ansible-test-comment'
+           log-all-domain: disable
+           name: 'ansible-test'

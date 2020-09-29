@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Subnet segment values.
+     fmgr_firewall_address6template_subnetsegment_values:
+        bypass_validation: False
+        adom: ansible
+        address6-template: 'ansible-name' # name
+        subnet-segment: '1' # id
+        state: present
+        firewall_address6template_subnetsegment_values:
+           name: 'ansible-name-val'
+           value: 'ansible'

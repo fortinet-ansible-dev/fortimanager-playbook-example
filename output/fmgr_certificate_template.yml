@@ -1,0 +1,21 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: no description
+     fmgr_certificate_template:
+        adom: ansible
+        state: present
+        certificate_template:
+           digest-type: sha1
+           id-type: host-ip
+           key-size: 512
+           key-type: rsa
+           name: 'ansible-test'
+           scep-password: 'fortinet1'
+           type: external

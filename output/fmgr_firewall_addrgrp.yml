@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 address groups.
+     fmgr_firewall_addrgrp:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_addrgrp:
+           allow-routing: disable
+           color: 0
+           member: 'ansible-test' # IPv4 address name
+           name: 'ansible-addrgrp4' # could not the same with other group, adress name, including IPv6 group and address 
+           visibility: disable

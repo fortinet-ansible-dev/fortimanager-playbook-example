@@ -1,0 +1,68 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SNMP community configuration.
+     fmgr_devprof_system_snmp_community:
+        bypass_validation: False
+        adom: ansible
+        devprof: 'ansible-test' # system template name, could find it in FortiManager UI: Device Manager --> Provisioning Templates --> System Templates
+        state: present
+        devprof_system_snmp_community:
+           events:
+             - cpu-high
+             - mem-low
+             - log-full
+             - intf-ip
+             - vpn-tun-up
+             - vpn-tun-down
+             - ha-switch
+             - ha-hb-failure
+             - ips-signature
+             - ips-anomaly
+             - av-virus
+             - av-oversize
+             - av-pattern
+             - av-fragmented
+             - fm-if-change
+             - fm-conf-change
+             - temperature-high
+             - voltage-alert
+             - ha-member-up
+             - ha-member-down
+             - ent-conf-change
+             - av-conserve
+             - av-bypass
+             - av-oversize-passed
+             - av-oversize-blocked
+             - ips-pkg-update
+             - power-supply-failure
+             - amc-bypass
+             - faz-disconnect
+             - fan-failure
+             - bgp-established
+             - bgp-backward-transition
+             - wc-ap-up
+             - wc-ap-down
+             - fswctl-session-up
+             - fswctl-session-down
+             - ips-fail-open
+             - load-balance-real-server-down
+             - device-new
+             - enter-intf-bypass
+             - exit-intf-bypass
+             - per-cpu-high
+             - power-blade-down
+             - confsync_failure
+           hosts:
+             -
+                 ha-direct: enable
+                 host-type: any
+                 id: 1
+           id: 1
+           name: 'ansible-test'
