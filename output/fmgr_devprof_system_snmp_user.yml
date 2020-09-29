@@ -1,0 +1,65 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SNMP user configuration.
+     fmgr_devprof_system_snmp_user:
+        bypass_validation: False
+        adom: ansible
+        devprof: 'ansible-test' # system template name, could find it in FortiManager UI: Device Manager --> Provisioning Templates --> System Templates
+        state: present
+        devprof_system_snmp_user:
+           auth-proto: md5
+           auth-pwd: 'fortinet'
+           events:
+             - cpu-high
+             - mem-low
+             - log-full
+             - intf-ip
+             - vpn-tun-up
+             - vpn-tun-down
+             - ha-switch
+             - fm-conf-change
+             - ips-signature
+             - ips-anomaly
+             - temperature-high
+             - voltage-alert
+             - av-virus
+             - av-oversize
+             - av-pattern
+             - av-fragmented
+             - ha-hb-failure
+             - fan-failure
+             - ha-member-up
+             - ha-member-down
+             - ent-conf-change
+             - av-conserve
+             - av-bypass
+             - av-oversize-passed
+             - av-oversize-blocked
+             - ips-pkg-update
+             - fm-if-change
+             - power-supply-failure
+             - amc-bypass
+             - faz-disconnect
+             - bgp-established
+             - bgp-backward-transition
+             - wc-ap-up
+             - wc-ap-down
+             - fswctl-session-up
+             - fswctl-session-down
+             - ips-fail-open
+             - load-balance-real-server-down
+             - device-new
+             - enter-intf-bypass
+             - exit-intf-bypass
+             - per-cpu-high
+             - power-blade-down
+             - confsync_failure
+           ha-direct: disable
+           name: 'ansible-test'

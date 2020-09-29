@@ -1,0 +1,28 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 address templates.
+     fmgr_firewall_address6template:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_address6template:
+           ip6: '::33/128'
+           name: 'ansible-name'
+           subnet-segment:
+             -
+                 bits: 1
+                 exclusive: enable
+                 id: 1
+                 name: 'ansible-name-sub'
+                 values:
+                   -
+                       name: 'ansible-name-val'
+                       value: 'ansible'
+           subnet-segment-count: 2

@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure firewall application groups.
+     fmgr_application_group:
+        adom: ansible
+        state: present
+        application_group:
+           comment: 'ansible-test-comment'
+           name: 'ansible-test'
+           type: application #<value in [application, category]>

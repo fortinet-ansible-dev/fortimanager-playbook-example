@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: modify this MMS content checksum list
+     fmgr_antivirus_mmschecksum_entries:
+        adom: FortiCarrier
+        mms-checksum: "3" # id
+        state: present
+        antivirus_mmschecksum_entries:
+           chekcksum: 'test_checksum'
+           name: "entries-name"
+           status: enable
