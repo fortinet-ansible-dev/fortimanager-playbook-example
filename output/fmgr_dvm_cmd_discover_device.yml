@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Probe a remote device and retrieve its device information and system status.
+     fmgr_dvm_cmd_discover_device:
+        bypass_validation: False
+        dvm_cmd_discover_device:
+           device:
+              adm_pass: fortinet # device password
+              adm_usr: admin # device user name
+              ip: 0.0.0.0 # device ip

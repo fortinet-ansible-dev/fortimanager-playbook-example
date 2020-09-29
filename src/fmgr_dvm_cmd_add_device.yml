@@ -1,0 +1,48 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.29
+# Label: deamon
+# Desc: Add a device to the Device Manager database.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Add a device to the Device Manager database.
+     fmgr_dvm_cmd_add_device:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        dvm_cmd_add_device:
+           adom: ansible
+           device:
+              adm_pass: fortinet # device password
+              adm_usr: admin # device user name
+              # desc: <value of string>
+              # device action: <value of string>
+              # faz.quota: <value of integer>
+              ip: 0.0.0.0 # device ip
+              # meta fields: <value of dict>
+              mgmt_mode: fmg #<value in [unreg, fmg, faz, ...]>
+              # mr: <value of integer>
+              name: ansible-test
+              # os_type: fos #<value in [unknown, fos, fsw, ...]>
+              # os_ver: unknown #<value in [unknown, 0.0, 1.0, ...]>
+              # patch: <value of integer>
+              # platform_str: <value of string>
+              # sn: <value of string>
+           flags:
+             - none
+             - create_task
+             - nonblocking
+             - log_dev
+          #  groups:
+          #    -
+          #        name: <value of string>
+          #        vdom: <value of string>

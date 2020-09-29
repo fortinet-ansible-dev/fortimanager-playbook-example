@@ -1,0 +1,25 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Add a device to the Device Manager database.
+     fmgr_dvm_cmd_add_device:
+        bypass_validation: False
+        dvm_cmd_add_device:
+           adom: ansible
+           device:
+              adm_pass: fortinet # device password
+              adm_usr: admin # device user name
+              ip: 0.0.0.0 # device ip
+              mgmt_mode: fmg #<value in [unreg, fmg, faz, ...]>
+              name: ansible-test
+           flags:
+             - none
+             - create_task
+             - nonblocking
+             - log_dev

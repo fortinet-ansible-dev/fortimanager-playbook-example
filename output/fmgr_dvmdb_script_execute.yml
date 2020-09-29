@@ -1,0 +1,21 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Run script.
+     fmgr_dvmdb_script_execute:
+        bypass_validation: False
+        adom: ansible
+        dvmdb_script_execute:
+           adom: ansible
+           package: ''
+           scope:
+             -
+                 name: ansible-test
+                 vdom: root
+           script: ansible-test
