@@ -1,0 +1,19 @@
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the dynamic mappings of Fortinet Single Sign On (FSSO) agent
+     fmgr_fact:
+       facts:
+           selector: 'user_fsso_dynamicmapping'
+           params:
+               adom: 'ansible'
+               fsso: 'ansible-fsso' # name
+               dynamic_mapping: '' 

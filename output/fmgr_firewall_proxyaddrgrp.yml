@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Web proxy address group configuration.
+     fmgr_firewall_proxyaddrgrp:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_proxyaddrgrp:
+           color: 1
+           comment: 'ansible-comment'
+           member: 'ansible-test' # need a valid proxy address name
+           name: 'ansible-test'

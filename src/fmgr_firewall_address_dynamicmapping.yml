@@ -1,0 +1,59 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv4
+# Desc: Configure dynamic mappings of IPv4 address
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv4 address
+     fmgr_firewall_address_dynamicmapping:
+        bypass_validation: True
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        address: 'ansible-test' # name
+        state: present
+        firewall_address_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           allow-routing: disable #<value in [disable, enable]>
+          #  associated-interface: 'port1'
+           cache-ttl: 0
+           color: 1
+           comment: 'ansible-comment'
+          #  country: <value of string>
+          #  end-ip: '255.255.255.255'
+          #  end-mac: <value of string>
+          #  epg-name: <value of string>
+          #  filter: <value of string>
+          #  fqdn: <value of string>
+          #  interface: <value of string>
+          #  obj-id: 0
+          #  organization: <value of string>
+          #  policy-group: <value of string>
+          #  sdn: <value in [aci, aws, nsx, ...]>
+          #  sdn-addr-type: <value in [private, public, all]>
+          #  sdn-tag: <value of string>
+          #  start-ip: '222.222.222.200'
+          #  start-mac: <value of string>
+           subnet: '222.222.222.101/32'
+           subnet-name: 'ansible-test'
+          #  tags: 'ansible'
+          #  tenant: <value of string>
+           type: ipmask #<value in [ipmask, iprange, fqdn, ...]>
+          #  url: <value of string>
+          #  uuid: <value of string>
+           visibility: enable
+          #  wildcard: <value of string>
+          #  wildcard-fqdn: <value of string>

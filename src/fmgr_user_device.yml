@@ -1,0 +1,51 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Configure devices.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure devices.
+     fmgr_user_device:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        user_device:
+           alias: ansible-test-device
+          #  avatar: <value of string>
+           category: android-device #<value in [none, android-device, blackberry-device, ...]>
+           comment: ansible-comment
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        avatar: <value of string>
+          #        category: <value in [none, android-device, blackberry-device, ...]>
+          #        comment: <value of string>
+          #        mac: <value of string>
+          #        master-device: <value of string>
+          #        tags: <value of string>
+          #        type: <value in [ipad, iphone, gaming-console, ...]>
+          #        user: <value of string>
+          #  mac: '::'
+          #  master-device: <value of string>
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+           type: iphone #<value in [ipad, iphone, gaming-console, ...]>
+          #  user: ansible

@@ -1,0 +1,57 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: IPv4
+# Desc: Configure IPv4 IP pools
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 IP pools.
+     fmgr_firewall_ippool:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_ippool:
+          #  arp-intf: <value of string>
+          #  arp-reply: <value in [disable, enable]>
+          #  associated-interface: <value of string>
+          #  block-size: <value of integer>
+           comments: 'ansible-comment'
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        arp-intf: <value of string>
+          #        arp-reply: <value in [disable, enable]>
+          #        associated-interface: <value of string>
+          #        block-size: <value of integer>
+          #        comments: <value of string>
+          #        endip: <value of string>
+          #        num-blocks-per-user: <value of integer>
+          #        pba-timeout: <value of integer>
+          #        permit-any-host: <value in [disable, enable]>
+          #        source-endip: <value of string>
+          #        source-startip: <value of string>
+          #        startip: <value of string>
+          #        type: <value in [overload, one-to-one, fixed-port-range, ...]>
+           endip: '222.222.222.254'
+           name: 'ansible-test'
+          #  num-blocks-per-user: <value of integer>
+          #  pba-timeout: <value of integer>
+          #  permit-any-host: <value in [disable, enable]>
+          #  source-endip: <value of string>
+          #  source-startip: <value of string>
+           startip: '222.222.222.0'
+           type: overload #<value in [overload, one-to-one, fixed-port-range, ...]>

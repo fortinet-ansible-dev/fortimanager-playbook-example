@@ -1,0 +1,39 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Configure profile groups.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure profile groups.
+     fmgr_firewall_profilegroup:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_profilegroup:
+           application-list: 'default' # need a valid profile name
+          #  av-profile: <value of string>
+          #  dlp-sensor: <value of string>
+          #  dnsfilter-profile: <value of string>
+          #  icap-profile: <value of string>
+          #  ips-sensor: <value of string>
+          #  mms-profile: <value of string>
+           name: 'ansible-test'
+          #  profile-protocol-options: <value of string>
+          #  spamfilter-profile: <value of string>
+          #  ssh-filter-profile: <value of string>
+          #  ssl-ssh-profile: <value of string>
+          #  voip-profile: <value of string>
+          #  waf-profile: <value of string>
+          #  webfilter-profile: <value of string>

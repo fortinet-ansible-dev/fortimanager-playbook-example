@@ -1,0 +1,47 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: internet service
+# Desc: Configure custom Internet Services
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure custom Internet Services.
+     fmgr_firewall_internetservicecustom:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_internetservicecustom:
+           comment: 'ansible-comment'
+          #  disable-entry:
+          #    -
+          #        id: <value of integer>
+          #        ip-range:
+          #          -
+          #              end-ip: <value of string>
+          #              id: <value of integer>
+          #              start-ip: <value of string>
+          #        port: <value of integer>
+          #        protocol: <value of integer>
+          #  entry:
+          #    -
+          #        dst: <value of string>
+          #        id: <value of integer>
+          #        port-range:
+          #          -
+          #              end-port: <value of integer>
+          #              id: <value of integer>
+          #              start-port: <value of integer>
+          #        protocol: <value of integer>
+          #  master-service-id: <value of string>
+           name: 'ansible-test'

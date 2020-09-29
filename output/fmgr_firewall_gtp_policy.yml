@@ -1,0 +1,38 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Policy.
+     fmgr_firewall_gtp_policy:
+        bypass_validation: False
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_policy:
+           action: allow #<value in [allow, deny]>
+           apn-sel-mode:
+             - ms
+             - net
+             - vrf
+           id: 1
+           max-apn-restriction: public-1 #<value in [all, public-1, public-2, ...]>
+           messages:
+             - create-req
+             - create-res
+             - update-req
+             - update-res
+           rat-type:
+             - any
+             - utran
+             - geran
+             - wlan
+             - gan
+             - hspa
+             - eutran
+             - virtual
+             - nbiot

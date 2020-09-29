@@ -1,0 +1,78 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall
+# Desc: Configure proxy policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure proxy policies.
+     fmgr_pkg_firewall_proxypolicy:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_proxypolicy:
+           action: accept #<value in [accept, deny, redirect]>
+          #  application-list: <value of string>
+          #  av-profile: <value of string>
+           comments: ansible-comment
+          #  disclaimer: <value in [disable, domain, policy, ...]>
+          #  dlp-sensor: <value of string>
+           dstaddr: all
+          #  dstaddr-negate: <value in [disable, enable]>
+          #  dstaddr6: <value of string>
+           dstintf: any
+          #  global-label: <value of string>
+          #  groups: <value of string>
+          #  http-tunnel-auth: <value in [disable, enable]>
+          #  icap-profile: <value of string>
+          #  internet-service: <value in [disable, enable]>
+          #  internet-service-custom: <value of string>
+          #  internet-service-id: <value of string>
+          #  internet-service-negate: <value in [disable, enable]>
+          #  ips-sensor: <value of string>
+          #  label: <value of string>
+          #  logtraffic: <value in [disable, all, utm]>
+          #  logtraffic-start: <value in [disable, enable]>
+          #  mms-profile: <value of string>
+           policyid: 1
+          #  poolname: <value of string>
+          #  profile-group: <value of string>
+          #  profile-protocol-options: <value of string>
+          #  profile-type: <value in [single, group]>
+          #  proxy: <value in [explicit-web, transparent-web, ftp, ...]>
+          #  redirect-url: <value of string>
+          #  replacemsg-override-group: <value of string>
+          #  scan-botnet-connections: <value in [disable, block, monitor]>
+           schedule: always
+           service: ALL
+          #  service-negate: <value in [disable, enable]>
+          #  spamfilter-profile: <value of string>
+           srcaddr: all
+          #  srcaddr-negate: <value in [disable, enable]>
+          #  srcaddr6: <value of string>
+           srcintf: any
+          #  ssl-ssh-profile: <value of string>
+           status: disable
+          #  tags: <value of string>
+          #  transparent: <value in [disable, enable]>
+          #  users: <value of string>
+          #  utm-status: <value in [disable, enable]>
+          #  uuid: <value of string>
+          #  waf-profile: <value of string>
+          #  webcache: <value in [disable, enable]>
+          #  webcache-https: <value in [disable, enable]>
+          #  webfilter-profile: <value of string>
+          #  webproxy-forward-server: <value of string>
+          #  webproxy-profile: <value of string>

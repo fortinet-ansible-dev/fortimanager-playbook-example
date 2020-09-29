@@ -1,0 +1,29 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure DHCP servers.
+     fmgr_system_dhcp_server:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        system_dhcp_server:
+           auto-configuration: enable #<value in [disable, enable]>
+           default-gateway: '222.222.222.1'
+           filename: ansible-file
+           id: 1
+           interface: any
+           ip-mode: range #<value in [range, usrgrp]>
+           ip-range:
+             -
+                 end-ip: 222.222.222.22
+                 id: 1
+                 start-ip: 222.222.222.2
+           netmask: 255.255.255.0
+           server-type: regular #<value in [regular, ipsec]>
+           status: disable #<value in [disable, enable]>

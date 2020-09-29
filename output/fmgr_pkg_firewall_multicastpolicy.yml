@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure multicast NAT policies.
+     fmgr_pkg_firewall_multicastpolicy:
+        bypass_validation: False
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_multicastpolicy:
+           action: accept #<value in [deny, accept]>
+           dstaddr: all
+           dstintf: any
+           id: 2
+           srcaddr: all
+           srcintf: any
+           status: disable

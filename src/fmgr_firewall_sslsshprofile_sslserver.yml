@@ -1,0 +1,33 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: SSL servers.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SSL servers.
+     fmgr_firewall_sslsshprofile_sslserver:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        ssl-ssh-profile: 'ansible-test' # name
+        state: present
+        firewall_sslsshprofile_sslserver:
+           ftps-client-cert-request: block #<value in [bypass, inspect, block]>
+           https-client-cert-request: bypass #<value in [bypass, inspect, block]>
+           id: 1
+           imaps-client-cert-request: bypass #<value in [bypass, inspect, block]>
+          #  ip: <value of string>
+          #  pop3s-client-cert-request: <value in [bypass, inspect, block]>
+          #  smtps-client-cert-request: <value in [bypass, inspect, block]>
+          #  ssl-other-client-cert-request: <value in [bypass, inspect, block]>

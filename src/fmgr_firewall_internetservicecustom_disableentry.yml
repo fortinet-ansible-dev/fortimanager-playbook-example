@@ -1,0 +1,33 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: internet service
+# Desc: Disable entries in the Internet Service database
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Disable entries in the Internet Service database.
+     fmgr_firewall_internetservicecustom_disableentry:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        internet-service-custom: 'ansible-test' # name
+        state: present
+        firewall_internetservicecustom_disableentry:
+           id: 1
+          #  ip-range:
+          #    -
+          #        end-ip: <value of string>
+          #        id: <value of integer>
+          #        start-ip: <value of string>
+           port: 1
+          #  protocol: <value of integer>

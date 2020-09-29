@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Config object tagging.
+     fmgr_user_device_tagging:
+        bypass_validation: False
+        adom: ansible
+        device: ansible-test-device # alias
+        state: present
+        user_device_tagging:
+           category: ansible-category # need a valid category
+           name: ansible-test-tagging
+           tags: ansible1

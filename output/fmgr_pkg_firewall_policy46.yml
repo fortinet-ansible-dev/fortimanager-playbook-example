@@ -1,0 +1,26 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 to IPv6 policies.
+     fmgr_pkg_firewall_policy46:
+        bypass_validation: True
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_policy46:
+           action: accept #<value in [deny, accept]>
+           comments: ansible-comment
+           dstaddr: ansible-test-vip46
+           dstintf: any
+           policyid: 1
+           schedule: always
+           service: ALL
+           srcaddr: all
+           srcintf: any
+           status: disable

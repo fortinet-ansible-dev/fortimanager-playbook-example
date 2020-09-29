@@ -1,0 +1,38 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: multicast-address, IPv4
+# Desc: Configure multicast addresses
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure multicast addresses.
+     fmgr_firewall_multicastaddress:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_multicastaddress:
+          #  associated-interface: <value of string>
+           color: 0
+           comment: 'ansible-comment'
+          #  end-ip: '222.222.222.100'
+           name: 'ansible-test'
+          #  start-ip: '222.222.222.0'
+           subnet: '222.222.221.0/24'
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+           type: broadcastmask #<value in [multicastrange, broadcastmask]>
+           visibility: disable

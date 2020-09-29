@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Certificate Revocation List.
+     fmgr_system_certificate_crl:
+        bypass_validation: False
+        state: present
+        system_certificate_crl:
+           comment: ansible-comment
+           crl: ansible-crl
+           name: ansible-test-crl

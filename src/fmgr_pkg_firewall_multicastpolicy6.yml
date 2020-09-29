@@ -1,0 +1,37 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall, IPv6
+# Desc: Configure IPv6 multicast NAT policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 multicast NAT policies.
+     fmgr_pkg_firewall_multicastpolicy6:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_multicastpolicy6:
+           action: accept #<value in [deny, accept]>
+           auto-asic-offload: enable
+           dstaddr: all
+           dstintf: any
+          #  end-port: <value of integer>
+           id: 1
+           logtraffic: enable
+          #  protocol: <value of integer>
+           srcaddr: all
+           srcintf: any
+          #  start-port: <value of integer>
+           status: disable

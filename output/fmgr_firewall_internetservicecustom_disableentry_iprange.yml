@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: IP ranges in the disable entry.
+     fmgr_firewall_internetservicecustom_disableentry_iprange:
+        bypass_validation: False
+        adom: ansible
+        internet-service-custom: 'ansible-test' # name
+        disable-entry: '1' # id
+        state: present
+        firewall_internetservicecustom_disableentry_iprange:
+           end-ip: '0.0.0.20'
+           id: 1
+           start-ip: '0.0.0.0'

@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SSL servers.
+     fmgr_firewall_sslsshprofile_sslserver:
+        bypass_validation: False
+        adom: ansible
+        ssl-ssh-profile: 'ansible-test' # name
+        state: present
+        firewall_sslsshprofile_sslserver:
+           ftps-client-cert-request: block #<value in [bypass, inspect, block]>
+           https-client-cert-request: bypass #<value in [bypass, inspect, block]>
+           id: 1
+           imaps-client-cert-request: bypass #<value in [bypass, inspect, block]>

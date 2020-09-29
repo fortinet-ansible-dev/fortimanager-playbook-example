@@ -1,0 +1,45 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv4, IPv6
+# Desc: Configure dynamic mappings of IPv6 to IPv4 virtual IPs
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv6 to IPv4 virtual IPs
+     fmgr_firewall_vip64_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        vip64: 'ansible-test-vip64' # name
+        state: present
+        firewall_vip64_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           arp-reply: enable
+           color: 1
+           comment: 'ansible-comment1'
+          #  extip: <value of string>
+          #  extport: <value of string>
+           id: 1
+          #  ldb-method: <value in [static, round-robin, weighted, ...]>
+          #  mappedip: <value of string>
+          #  mappedport: <value of string>
+          #  monitor: <value of string>
+          #  portforward: <value in [disable, enable]>
+          #  protocol: <value in [tcp, udp]>
+          #  server-type: <value in [http, tcp, udp, ...]>
+          #  src-filter: <value of string>
+          #  type: <value in [static-nat, server-load-balance]>
+          #  uuid: <value of string>

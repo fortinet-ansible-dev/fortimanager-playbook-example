@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: system
+# Desc: Replacement message table entries.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Replacement message table entries.
+     fmgr_system_replacemsggroup_nacquar:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        replacemsg-group: ansible-test # name
+        state: present
+        system_replacemsggroup_nacquar:
+           buffer: ansible-buffer
+           format: text #<value in [none, text, html, ...]>
+           header: none #<value in [none, http, 8bit]>
+           msg-type: ansible-msgtype # required

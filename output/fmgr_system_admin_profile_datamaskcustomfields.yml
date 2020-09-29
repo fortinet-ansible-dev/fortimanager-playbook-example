@@ -1,0 +1,24 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Customized datamask fields.
+     fmgr_system_admin_profile_datamaskcustomfields:
+        bypass_validation: False
+        profile: ansible-test-profile # profileid
+        state: present
+        system_admin_profile_datamaskcustomfields:
+           field-category:
+             - log
+             - fortiview
+             - alert
+             - ueba
+             - all
+           field-name: ansible-test-mask
+           field-status: disable
+           field-type: string #<value in [string, ip, mac, ...]>

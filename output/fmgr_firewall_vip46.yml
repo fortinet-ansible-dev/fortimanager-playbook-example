@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 to IPv6 virtual IPs.
+     fmgr_firewall_vip46:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_vip46:
+           arp-reply: enable
+           color: 1
+           comment: 'ansible-comment'
+           id: 1
+           ldb-method: static #<value in [static, round-robin, weighted, ...]>
+           name: 'ansible-test-vip46'
+           protocol: tcp #<value in [tcp, udp]>

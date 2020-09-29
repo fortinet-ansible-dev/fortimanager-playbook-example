@@ -1,0 +1,42 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv4
+# Desc: Configure dynamic mappings of IPv4 IP pool
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv4 IP pool
+     fmgr_firewall_ippool_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        ippool: 'ansible-test' # name
+        state: present
+        firewall_ippool_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+          #  arp-intf: <value of string>
+          #  arp-reply: <value in [disable, enable]>
+          #  associated-interface: <value of string>
+          #  block-size: <value of integer>
+           comments: 'ansible-comment'
+           endip: '222.222.222.253'
+          #  num-blocks-per-user: <value of integer>
+          #  pba-timeout: <value of integer>
+          #  permit-any-host: <value in [disable, enable]>
+          #  source-endip: <value of string>
+          #  source-startip: <value of string>
+           startip: '222.222.222.0'
+           type: overload #<value in [overload, one-to-one, fixed-port-range, ...]>

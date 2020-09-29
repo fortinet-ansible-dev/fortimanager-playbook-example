@@ -1,0 +1,55 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Configure SSL/SSH protocol options.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure SSL/SSH protocol options.
+     fmgr_firewall_sslsshprofile:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_sslsshprofile:
+          #  caname: <value of string>
+           comment: 'ansible-comment1'
+           mapi-over-https: disable #<value in [disable, enable]>
+           name: 'ansible-test'
+          #  rpc-over-https: <value in [disable, enable]>
+          #  server-cert: <value of string>
+          #  server-cert-mode: <value in [re-sign, replace]>
+          #  ssl-anomalies-log: <value in [disable, enable]>
+          #  ssl-exempt:
+          #    -
+          #        address: <value of string>
+          #        address6: <value of string>
+          #        fortiguard-category: <value of string>
+          #        id: <value of integer>
+          #        regex: <value of string>
+          #        type: <value in [fortiguard-category, address, address6, ...]>
+          #        wildcard-fqdn: <value of string>
+          #  ssl-exemptions-log: <value in [disable, enable]>
+          #  ssl-server:
+          #    -
+          #        ftps-client-cert-request: <value in [bypass, inspect, block]>
+          #        https-client-cert-request: <value in [bypass, inspect, block]>
+          #        id: <value of integer>
+          #        imaps-client-cert-request: <value in [bypass, inspect, block]>
+          #        ip: <value of string>
+          #        pop3s-client-cert-request: <value in [bypass, inspect, block]>
+          #        smtps-client-cert-request: <value in [bypass, inspect, block]>
+          #        ssl-other-client-cert-request: <value in [bypass, inspect, block]>
+          #  untrusted-caname: <value of string>
+           use-ssl-server: disable #<value in [disable, enable]>
+           whitelist: enable #<value in [disable, enable]>

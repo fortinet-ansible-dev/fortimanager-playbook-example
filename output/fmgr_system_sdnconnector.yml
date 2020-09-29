@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure connection to SDN Connector.
+     fmgr_system_sdnconnector:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        system_sdnconnector:
+           azure-region: global #<value in [global, china, germany, ...]>
+           compartment-id: 1
+           name: ansible-test-sdn
+           password: fortinet
+           server: ALL
+           status: disable
+           type: aws #<value in [aci, aws, nsx, ...]>

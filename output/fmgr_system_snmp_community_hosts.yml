@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Allow hosts configuration.
+     fmgr_system_snmp_community_hosts:
+        bypass_validation: True
+        community: 1 # id
+        state: present
+        system_snmp_community_hosts:
+           id: 1
+           interface: port1
+           ip: '222.222.222.3/32'

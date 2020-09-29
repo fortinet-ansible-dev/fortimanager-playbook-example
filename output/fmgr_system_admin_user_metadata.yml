@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure meta data.
+     fmgr_system_admin_user_metadata:
+        bypass_validation: True
+        user: ansible-test # userid
+        state: present
+        system_admin_user_metadata:
+           fieldlength: 50
+           fieldname: Contact Address
+           fieldvalue: 'ansible@fortinet.com'
+           importance: optional #<value in [optional, required]>
+           status: enabled #<value in [disabled, enabled]>

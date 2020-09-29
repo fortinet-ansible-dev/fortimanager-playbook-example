@@ -1,0 +1,45 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: LDAP server entry configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: LDAP server entry configuration.
+     fmgr_system_admin_ldap:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_admin_ldap:
+           adom:
+             -
+                 adom-name: ansible
+          #  adom-attr: <value of string>
+          #  attributes: <value of string>
+          #  ca-cert: <value of string>
+          #  cnid: <value of string>
+          #  connect-timeout: <value of integer>
+          #  dn: <value of string>
+          #  filter: <value of string>
+          #  group: <value of string>
+          #  memberof-attr: <value of string>
+           name: ansible-test-ldap
+           password: Fortinet
+           port: 390
+          #  profile-attr: <value of string>
+          #  secondary-server: <value of string>
+          #  secure: <value in [disable, starttls, ldaps]>
+           server: ansible
+          #  tertiary-server: <value of string>
+           type: regular #<value in [simple, anonymous, regular]>
+           username: ansible-username

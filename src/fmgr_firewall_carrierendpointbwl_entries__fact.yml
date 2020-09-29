@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier
+# Desc: Retrieve all the entries in the carrier endpoint black/white list table
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the carrier endpoint black/white list table
+     fmgr_fact:
+       facts:
+           selector: 'firewall_carrierendpointbwl_entries'
+           params:
+               adom: 'FortiCarrier' # This is FOC-only object, need a FortiCarrier adom
+               carrier-endpoint-bwl: '1' # id
+               entries: ''

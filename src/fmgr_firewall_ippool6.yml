@@ -1,0 +1,37 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: IPv6
+# Desc: Configure IPv6 IP pools
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 IP pools.
+     fmgr_firewall_ippool6:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_ippool6:
+           comments: 'ansible-comment'
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        comments: <value of string>
+          #        endip: <value of string>
+          #        startip: <value of string>
+           endip: '2001::101'
+           name: 'ansible-test'
+           startip: '2001::0'

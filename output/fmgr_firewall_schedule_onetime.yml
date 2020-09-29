@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Onetime schedule configuration.
+     fmgr_firewall_schedule_onetime:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_schedule_onetime:
+           color: 1
+           end: '15:00 2020/08/17'
+           name: 'ansible-test-onetime'
+           start: '07:00 2020/08/17'

@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: POP3 server entry configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: POP3 server entry configuration.
+     fmgr_user_pop3:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        user_pop3:
+           name: ansible-test-pop
+           port: 8000
+           secure: none #<value in [none, starttls, pop3s]>
+           server: ansible
+           ssl-min-proto-version: default #<value in [default, TLSv1, TLSv1-1, ...]>

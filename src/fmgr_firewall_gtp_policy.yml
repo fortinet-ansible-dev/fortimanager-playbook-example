@@ -1,0 +1,53 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier, GTP
+# Desc: GTP Policy
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Policy.
+     fmgr_firewall_gtp_policy:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_policy:
+           action: allow #<value in [allow, deny]>
+           apn-sel-mode:
+             - ms
+             - net
+             - vrf
+          #  apnmember: <value of string>
+           id: 1
+          #  imei: <value of string>
+          #  imsi: <value of string>
+           max-apn-restriction: public-1 #<value in [all, public-1, public-2, ...]>
+           messages:
+             - create-req
+             - create-res
+             - update-req
+             - update-res
+          #  msisdn: <value of string>
+          #  rai: <value of string>
+           rat-type:
+             - any
+             - utran
+             - geran
+             - wlan
+             - gan
+             - hspa
+             - eutran
+             - virtual
+             - nbiot
+          #  uli: <value of string>

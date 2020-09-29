@@ -1,0 +1,22 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure external resource.
+     fmgr_system_externalresource:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        system_externalresource:
+           category: 0
+           comments: string
+           name: string
+           refresh-rate: 1
+           resource: string
+           status: disable
+           type: category #<value in [category, address, domain, ...]>

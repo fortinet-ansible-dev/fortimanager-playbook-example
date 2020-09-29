@@ -1,0 +1,114 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: Configure dynamic mappings of RADIUS server
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of RADIUS server
+     fmgr_user_radius_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        radius: ansible-test-radius # name
+        state: present
+        user_radius_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+          #  acct-all-servers: <value in [disable, enable]>
+          #  acct-interim-interval: <value of integer>
+          #  all-usergroup: <value in [disable, enable]>
+          #  auth-type: <value in [pap, chap, ms_chap, ...]>
+          #  class: <value of string>
+          #  dp-carrier-endpoint-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  dp-carrier-endpoint-block-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  dp-context-timeout: <value of integer>
+          #  dp-flush-ip-session: <value in [disable, enable]>
+          #  dp-hold-time: <value of integer>
+          #  dp-http-header: <value of string>
+          #  dp-http-header-fallback: <value in [ip-header-address, default-profile]>
+          #  dp-http-header-status: <value in [disable, enable]>
+          #  dp-http-header-suppress: <value in [disable, enable]>
+          #  dp-log-dyn_flags:
+          #    - none
+          #    - protocol-error
+          #    - profile-missing
+          #    - context-missing
+          #    - accounting-stop-missed
+          #    - accounting-event
+          #    - radiusd-other
+          #    - endpoint-block
+          #  dp-log-period: <value of integer>
+          #  dp-mem-percent: <value of integer>
+          #  dp-profile-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  dp-profile-attribute-key: <value of string>
+          #  dp-radius-response: <value in [disable, enable]>
+          #  dp-radius-server-port: <value of integer>
+          #  dp-secret: <value of string>
+          #  dp-validate-request-secret: <value in [disable, enable]>
+          #  dynamic-profile: <value in [disable, enable]>
+          #  endpoint-translation: <value in [disable, enable]>
+          #  ep-carrier-endpoint-convert-hex: <value in [disable, enable]>
+          #  ep-carrier-endpoint-header: <value of string>
+          #  ep-carrier-endpoint-header-suppress: <value in [disable, enable]>
+          #  ep-carrier-endpoint-prefix: <value in [disable, enable]>
+          #  ep-carrier-endpoint-prefix-range-max: <value of integer>
+          #  ep-carrier-endpoint-prefix-range-min: <value of integer>
+          #  ep-carrier-endpoint-prefix-string: <value of string>
+          #  ep-carrier-endpoint-source: <value in [http-header, cookie]>
+          #  ep-ip-header: <value of string>
+          #  ep-ip-header-suppress: <value in [disable, enable]>
+          #  ep-missing-header-fallback: <value in [session-ip, policy-profile]>
+          #  ep-profile-query-type: <value in [session-ip, extract-ip, extract-carrier-endpoint]>
+          #  h3c-compatibility: <value in [disable, enable]>
+          #  nas-ip: <value of string>
+          #  password-encoding: <value in [ISO-8859-1, auto]>
+          #  password-renewal: <value in [disable, enable]>
+          #  radius-coa: <value in [disable, enable]>
+          #  radius-port: <value of integer>
+          #  rsso: <value in [disable, enable]>
+          #  rsso-context-timeout: <value of integer>
+          #  rsso-endpoint-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  rsso-endpoint-block-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  rsso-ep-one-ip-only: <value in [disable, enable]>
+          #  rsso-flush-ip-session: <value in [disable, enable]>
+          #  rsso-log-flags:
+          #    - none
+          #    - protocol-error
+          #    - profile-missing
+          #    - context-missing
+          #    - accounting-stop-missed
+          #    - accounting-event
+          #    - radiusd-other
+          #    - endpoint-block
+          #  rsso-log-period: <value of integer>
+          #  rsso-radius-response: <value in [disable, enable]>
+          #  rsso-radius-server-port: <value of integer>
+          #  rsso-secret: <value of string>
+          #  rsso-validate-request-secret: <value in [disable, enable]>
+          #  secondary-secret: <value of string>
+          #  secondary-server: <value of string>
+          #  secret: <value of string>
+           server: ansible
+          #  source-ip: <value of string>
+          #  sso-attribute: <value in [User-Name, User-Password, CHAP-Password, ...]>
+          #  sso-attribute-key: <value of string>
+          #  sso-attribute-value-override: <value in [disable, enable]>
+          #  tertiary-secret: <value of string>
+          #  tertiary-server: <value of string>
+           timeout: 100
+          #  use-group-for-profile: <value in [disable, enable]>
+          #  use-management-vdom: <value in [disable, enable]>
+          #  username-case-sensitive: <value in [disable, enable]>

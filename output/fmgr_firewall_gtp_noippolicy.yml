@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: No IP policy.
+     fmgr_firewall_gtp_noippolicy:
+        bypass_validation: False
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_noippolicy:
+           action: allow #<value in [allow, deny]>
+           id: 1
+           type: ietf #<value in [etsi, ietf]>

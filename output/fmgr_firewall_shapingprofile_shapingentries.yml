@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Define shaping entries of this shaping profile.
+     fmgr_firewall_shapingprofile_shapingentries:
+        bypass_validation: False
+        adom: ansible
+        shaping-profile: 'ansible-test' # profile-name
+        state: present
+        firewall_shapingprofile_shapingentries:
+           guaranteed-bandwidth-percentage: 50
+           id: 1
+           maximum-bandwidth-percentage: 70
+           priority: medium #<value in [low, medium, high]>

@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure local users.
+     fmgr_user_local:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        user_local:
+           id: 1
+           name: ansible-test-local
+           passwd: fortinet
+           status: disable

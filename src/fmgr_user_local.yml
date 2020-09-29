@@ -1,0 +1,45 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Configure local users.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure local users.
+     fmgr_user_local:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        user_local:
+          #  auth-concurrent-override: <value in [disable, enable]>
+          #  auth-concurrent-value: <value of integer>
+          #  authtimeout: <value of integer>
+          #  email-to: <value of string>
+          #  fortitoken: <value of string>
+           id: 1
+          #  ldap-server: <value of string>
+           name: ansible-test-local
+           passwd: fortinet
+          #  passwd-policy: <value of string>
+          #  ppk-identity: <value of string>
+          #  ppk-secret: <value of string>
+          #  radius-server: <value of string>
+          #  sms-custom-server: <value of string>
+          #  sms-phone: <value of string>
+          #  sms-server: <value in [fortiguard, custom]>
+           status: disable
+          #  tacacs+-server: <value of string>
+          #  two-factor: <value in [disable, fortitoken, email, ...]>
+          #  type: <value in [password, radius, tacacs+, ...]>
+          #  workstation: <value of string>

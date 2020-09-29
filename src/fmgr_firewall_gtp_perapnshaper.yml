@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier, GTP
+# Desc: Per APN shaper
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Per APN shaper.
+     fmgr_firewall_gtp_perapnshaper:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_perapnshaper:
+          #  apn: <value of string>
+           id: 1
+           rate-limit: 20
+          #  version: <value of integer>

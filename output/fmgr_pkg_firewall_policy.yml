@@ -1,0 +1,28 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 policies.
+     fmgr_pkg_firewall_policy:
+        bypass_validation: False
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_policy:
+           action: accept #<value in [deny, accept, ipsec, ...]>
+           comments: ansible-comment
+           dstaddr: all
+           dstintf: any
+           name: ansible-test-policy
+           nat: disable
+           policyid: 1
+           schedule: always
+           service: ALL
+           srcaddr: all
+           srcintf: any
+           status: disable

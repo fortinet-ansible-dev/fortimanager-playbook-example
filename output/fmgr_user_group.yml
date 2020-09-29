@@ -1,0 +1,19 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure user groups.
+     fmgr_user_group:
+        bypass_validation: False
+        adom: FortiCarrier
+        state: present
+        user_group:
+           id: 1
+           name: ansible-test-group
+           password: specify #<value in [auto-generate, specify, disable]>
+           user-id: email #<value in [email, auto-generate, specify]>

@@ -1,0 +1,45 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv6
+# Desc: Configure dynamic mappings of IPv6 address
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv6 address
+     fmgr_firewall_address6_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        address6: 'ansible-test' # name
+        state: present
+        firewall_address6_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           cache-ttl: 0
+           color: 22
+           comment: 'ansible-test-comment'
+           end-ip: '::100'
+          #  fqdn: <value of string>
+           host: '::'
+           host-type: any #<value in [any, specific]>
+           ip6: '::/128'
+          #  obj-id: 'ansible-test'
+          #  sdn: nsx
+           start-ip: '::'
+          #  tags: 'ansible-tag'
+          #  template: 'ansible-test'
+           type: iprange #<value in [ipprefix, iprange, nsx, ...]>
+          #  uuid: <value of string>
+           visibility: enable

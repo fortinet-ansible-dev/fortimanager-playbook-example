@@ -1,0 +1,24 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv4 IP pool
+     fmgr_firewall_ippool_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        ippool: 'ansible-test' # name
+        state: present
+        firewall_ippool_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           comments: 'ansible-comment'
+           endip: '222.222.222.253'
+           startip: '222.222.222.0'
+           type: overload #<value in [overload, one-to-one, fixed-port-range, ...]>

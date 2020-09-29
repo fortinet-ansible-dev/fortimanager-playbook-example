@@ -1,0 +1,30 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Config global/VDOM Wildcard FQDN address.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Config global/VDOM Wildcard FQDN address.
+     fmgr_firewall_wildcardfqdn_custom:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_wildcardfqdn_custom:
+           color: 1
+           comment: 'ansible-comment'
+           name: 'ansible-test'
+          #  uuid: <value of string>
+          #  visibility: <value in [disable, enable]>
+          #  wildcard-fqdn: <value of string>

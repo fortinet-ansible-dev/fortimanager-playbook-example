@@ -1,0 +1,34 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Guest User.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Guest User.
+     fmgr_user_group_guest:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        group: ansible-test-group # name
+        state: present
+        user_group_guest:
+           comment: ansible-comment
+          #  company: <value of string>
+           email: test@fortinet.com
+          #  expiration: <value of string>
+          #  mobile-phone: <value of string>
+           name: ansible-test-guest
+           password: fortinet
+          #  sponsor: <value of string>
+           user-id: Email

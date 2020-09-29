@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Disable entries in the Internet Service database.
+     fmgr_firewall_internetservicecustom_disableentry:
+        bypass_validation: False
+        adom: ansible
+        internet-service-custom: 'ansible-test' # name
+        state: present
+        firewall_internetservicecustom_disableentry:
+           id: 1
+           port: 1

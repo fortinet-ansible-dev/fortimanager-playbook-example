@@ -1,0 +1,25 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Retrieve all the guest users
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the guest users
+     fmgr_fact:
+       facts:
+           selector: 'user_group_guest' #Note: this session will been shown only if the Type parameter in User Grup is 'GUEST'
+           params:
+               adom: 'ansible'
+               group: 'ansible-test-group' # name
+               guest: ''
+               

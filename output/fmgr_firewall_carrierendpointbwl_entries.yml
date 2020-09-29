@@ -1,0 +1,26 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Carrier end point black/white list.
+     fmgr_firewall_carrierendpointbwl_entries:
+        bypass_validation: False
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        carrier-endpoint-bwl: '1' # id
+        state: present
+        firewall_carrierendpointbwl_entries:
+           action:
+             - block
+             - exempt
+             - exempt-mass-mms
+           carrier-endpoint: 'string' 
+           log-action:
+             - archive
+             - intercept
+           pattern-type: wildcard #<value in [wildcard, regexp, simple]>
+           status: enable

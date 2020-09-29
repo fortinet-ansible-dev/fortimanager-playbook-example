@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: route
+# Desc: Configure identity based routing rule
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Rule.
+     fmgr_firewall_identitybasedroute_rule:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        identity-based-route: 'ansible-test' # name
+        state: present
+        firewall_identitybasedroute_rule:
+          #  device: <value of string>
+          #  gateway: '222.222.222.11'
+          #  groups: <value of string>
+           id: 1

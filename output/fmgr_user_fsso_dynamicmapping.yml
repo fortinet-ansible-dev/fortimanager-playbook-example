@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of Fortinet Single Sign On (FSSO) agent
+     fmgr_user_fsso_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        fsso: ansible-fsso # name
+        state: present
+        user_fsso_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           password: fortinet
+           port: 9000
+           server: ansible

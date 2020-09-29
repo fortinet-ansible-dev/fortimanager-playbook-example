@@ -1,0 +1,63 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Configure user groups.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure user groups.
+     fmgr_user_group:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier
+        state: present
+        user_group:
+          #  auth-concurrent-override: <value in [disable, enable]>
+          #  auth-concurrent-value: <value of integer>
+          #  authtimeout: <value of integer>
+          #  company: <value in [optional, mandatory, disabled]>
+          #  email: <value in [disable, enable]>
+          #  expire: <value of integer>
+          #  expire-type: <value in [immediately, first-successful-login]>
+          #  group-type: <value in [firewall, directory-service, fsso-service, ...]>
+          #  guest:
+          #    -
+          #        comment: <value of string>
+          #        company: <value of string>
+          #        email: <value of string>
+          #        expiration: <value of string>
+          #        mobile-phone: <value of string>
+          #        name: <value of string>
+          #        password: <value of string>
+          #        sponsor: <value of string>
+          #        user-id: <value of string>
+          #  http-digest-realm: <value of string>
+           id: 1
+          #  match:
+          #    -
+          #        _gui_meta: <value of string>
+          #        group-name: <value of string>
+          #        id: <value of integer>
+          #        server-name: <value of string>
+          #  max-accounts: <value of integer>
+          #  member: <value of string>
+          #  mobile-phone: <value in [disable, enable]>
+          #  multiple-guest-add: <value in [disable, enable]>
+           name: ansible-test-group
+           password: specify #<value in [auto-generate, specify, disable]>
+          #  sms-custom-server: <value of string>
+          #  sms-server: <value in [fortiguard, custom]>
+          #  sponsor: <value in [optional, mandatory, disabled]>
+          #  sso-attribute-value: <value of string>
+           user-id: email #<value in [email, auto-generate, specify]>
+          #  user-name: <value in [disable, enable]>

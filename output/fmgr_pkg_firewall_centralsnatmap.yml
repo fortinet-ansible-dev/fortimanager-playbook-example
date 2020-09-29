@@ -1,0 +1,21 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure central SNAT policies.
+     fmgr_pkg_firewall_centralsnatmap:
+        bypass_validation: False
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_centralsnatmap:
+           dst-addr: 'ansible-test'
+           nat: enable
+           orig-addr: 'ansible-test'
+           policyid: 2
+           status: disable

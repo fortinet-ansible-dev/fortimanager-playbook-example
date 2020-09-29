@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 DoS policies.
+     fmgr_pkg_firewall_dospolicy:
+        bypass_validation: False
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_dospolicy:
+           comments: 'ansible-comment1'
+           interface: 'ansible-interface'
+           policyid: 1
+           status: enable

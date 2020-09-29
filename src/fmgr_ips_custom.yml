@@ -1,0 +1,39 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: IPS
+# Desc: Configure IPS custom signature.
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPS custom signature.
+     fmgr_ips_custom:
+        bypass_validation: True
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        ips_custom:
+          #  action: block #<value in [block, pass]>
+          #  application: <value of string>
+          #  comment: 'ansible-comment'
+          #  location: <value of string>
+          #  log: enable
+          #  log-packet: enable
+          #  os: 'Windows'
+          #  protocol: 'TCP'
+           rule-id: 1 # Required, no less than 1000;
+          #  severity: 'high'
+          #  sig-name: 'ansible'
+           signature: 'F-SBID(--name: [string]; --service: [string]; --flow: [string])' # Required; Need follow signature syntax, check 'https://docs.fortinet.com/document/ipsengine/3.6.0/custom-ips-and-application-control-signature-syntax-guide/274110/creating-ips-and-application-control-signatures' for more information;
+          #  status: enable #<value in [disable, enable]>
+           tag: ansible-ipscustom #  Required

@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier, GTP
+# Desc: Retrieve all the IP policys in the GTP
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the IP policys in the GTP
+     fmgr_fact:
+       facts:
+           selector: 'firewall_gtp_ippolicy'
+           params:
+               adom: 'FortiCarrier' # This is FOC-only object, need a FortiCarrier adom
+               gtp: 'ansible-test' # name
+               ip-policy: ''

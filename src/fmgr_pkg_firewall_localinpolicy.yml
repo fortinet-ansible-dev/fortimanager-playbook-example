@@ -1,0 +1,34 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall, IPv4
+# Desc: Configure user defined IPv4 local-in policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure user defined IPv4 local-in policies.
+     fmgr_pkg_firewall_localinpolicy:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_localinpolicy:
+           action: deny #<value in [deny, accept]>
+           dstaddr: all
+          #  ha-mgmt-intf-only: enable
+           intf: any
+           policyid: 1
+           schedule: always
+           service: ALL
+           srcaddr: all
+           status: disable

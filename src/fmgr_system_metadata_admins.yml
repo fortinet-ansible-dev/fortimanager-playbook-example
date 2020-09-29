@@ -1,0 +1,27 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: system
+# Desc: Configure admins.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure admins.
+     fmgr_system_metadata_admins:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_metadata_admins:
+           fieldlength: 50 #<value in [20, 50, 255]>
+           fieldname: 'ansible test'
+           importance: optional #<value in [optional, required]>
+           status: enabled

@@ -1,0 +1,32 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SNMP user configuration.
+     fmgr_system_snmp_user:
+        bypass_validation: False
+        state: present
+        system_snmp_user:
+           auth-proto: md5 #<value in [md5, sha]>
+           auth-pwd: fortinet
+           events:
+             - disk_low
+             - ha_switch
+             - intf_ip_chg
+             - sys_reboot
+             - cpu_high
+             - mem_low
+             - log-alert
+             - log-rate
+             - log-data-rate
+             - lic-gbday
+             - lic-dev-quota
+             - cpu-high-exclude-nice
+           name: ansible-test-snmpuser
+           queries: disable
+           security-level: no-auth-no-priv #<value in [no-auth-no-priv, auth-no-priv, auth-priv]>

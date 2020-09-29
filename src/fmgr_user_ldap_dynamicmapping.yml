@@ -1,0 +1,62 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: Configure dynamic mappings of LDAP server
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of LDAP server
+     fmgr_user_ldap_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        ldap: ansible-test-ldap # name
+        state: present
+        user_ldap_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+          #  account-key-filter: <value of string>
+          #  account-key-name: <value of string>
+          #  account-key-processing: <value in [same, strip]>
+          #  ca-cert: <value of string>
+          #  cnid: <value of string>
+           dn: ansible-test-dn
+          #  filter: <value of string>
+          #  group: <value of string>
+          #  group-filter: <value of string>
+          #  group-member-check: <value in [user-attr, group-object, posix-group-object]>
+          #  group-object-filter: <value of string>
+          #  group-object-search-base: <value of string>
+          #  group-search-base: <value of string>
+          #  member-attr: <value of string>
+          #  obtain-user-info: <value in [disable, enable]>
+           password: fortinet
+          #  password-expiry-warning: <value in [disable, enable]>
+          #  password-renewal: <value in [disable, enable]>
+           port: 9000
+          #  retrieve-protection-profile: <value of string>
+          #  search-type:
+          #    - nested
+          #    - recursive
+          #  secondary-server: <value of string>
+          #  secure: <value in [disable, starttls, ldaps]>
+           server: ansible
+          #  server-identity-check: <value in [disable, enable]>
+          #  source-ip: <value of string>
+          #  ssl-min-proto-version: <value in [default, TLSv1, TLSv1-1, ...]>
+          #  tertiary-server: <value of string>
+          #  type: <value in [simple, anonymous, regular]>
+          #  user-info-exchange-server: <value of string>
+           username: ansible-test-dyn

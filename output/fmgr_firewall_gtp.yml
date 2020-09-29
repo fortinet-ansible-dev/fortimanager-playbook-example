@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure GTP.
+     fmgr_firewall_gtp:
+        bypass_validation: False
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        state: present
+        firewall_gtp:
+           monitor-mode: disable #<value in [disable, enable, vdom]>
+           name: 'ansible-test'

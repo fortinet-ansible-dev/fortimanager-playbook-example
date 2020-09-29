@@ -1,0 +1,35 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall, IPv4
+# Desc: Anomaly name.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Anomaly name.
+     fmgr_pkg_firewall_dospolicy_anomaly:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        DoS-policy: 1 # policyid
+        state: present
+        pkg_firewall_dospolicy_anomaly:
+           action: pass #<value in [pass, block, proxy]>
+           log: enable
+           name: ansible-test-anomaly
+           quarantine: none #<value in [none, attacker, both, ...]>
+          #  quarantine-expiry: <value of string>
+          #  quarantine-log: <value in [disable, enable]>
+           status: disable
+          #  threshold: <value of integer>
+          #  threshold(default): <value of integer>

@@ -1,0 +1,18 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Real servers.
+     fmgr_firewall_vip46_realservers:
+        bypass_validation: False
+        adom: ansible
+        vip46: 'ansible-test-vip46' # name
+        state: present
+        firewall_vip46_realservers:
+           healthcheck: disable
+           id: 1

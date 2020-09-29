@@ -1,0 +1,37 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: Configure peer users.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure peer users.
+     fmgr_user_peer:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        user_peer:
+          #  ca: <value of string>
+          #  cn: <value of string>
+           cn-type: email #<value in [string, email, FQDN, ...]>
+          #  ldap-mode: <value in [password, principal-name]>
+          #  ldap-password: <value of string>
+          #  ldap-server: <value of string>
+          #  ldap-username: <value of string>
+          #  mandatory-ca-verify: <value in [disable, enable]>
+           name: ansible-test-peer
+          #  ocsp-override-server: <value of string>
+           passwd: fortinet
+          #  subject: <value of string>
+          #  two-factor: <value in [disable, enable]>

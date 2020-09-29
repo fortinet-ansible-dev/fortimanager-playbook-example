@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 multicast address.
+     fmgr_firewall_multicastaddress6:
+        bypass_validation: False
+        adom: ansible
+        state: present
+        firewall_multicastaddress6:
+           color: 2
+           comment: 'ansible-comment'
+           ip6: '2001::10/128'
+           name: 'ansible-test'
+           visibility: enable

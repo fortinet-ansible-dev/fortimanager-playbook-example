@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall, IPv6
+# Desc: Retrieve all the real servers of virtual IP for IPv6
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the real servers of virtual IP for IPv6
+     fmgr_fact:
+       facts:
+           selector: 'firewall_vip6_realservers'
+           params:
+               adom: 'ansible'
+               vip6: 'ansible-test-vip6' # name
+               realservers: ''

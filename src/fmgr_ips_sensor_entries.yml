@@ -1,0 +1,49 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: IPS
+# Desc: IPS sensor filter.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: IPS sensor filter.
+     fmgr_ips_sensor_entries:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        sensor: 'ansible-test-ipssensor' # name
+        state: present
+        ips_sensor_entries:
+           action: block #<value in [pass, block, reset, ...]>
+          #  application: <value of string>
+          #  exempt-ip:
+          #    -
+          #        dst-ip: <value of string>
+          #        id: <value of integer>
+          #        src-ip: <value of string>
+           id: 1
+          #  location: <value of string>
+          #  log: <value in [disable, enable]>
+          #  log-attack-context: <value in [disable, enable]>
+          #  log-packet: <value in [disable, enable]>
+          #  os: <value of string>
+          #  protocol: <value of string>
+          #  quarantine: <value in [none, attacker, both, ...]>
+          #  quarantine-expiry: <value of string>
+          #  quarantine-log: <value in [disable, enable]>
+          #  rate-count: <value of integer>
+          #  rate-duration: <value of integer>
+          #  rate-mode: <value in [periodical, continuous]>
+          #  rate-track: <value in [none, src-ip, dest-ip, ...]>
+          #  rule: <value of string>
+          #  severity: <value of string>
+          #  status: <value in [disable, enable, default]>

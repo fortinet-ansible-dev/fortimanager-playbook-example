@@ -1,0 +1,30 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv6 address
+     fmgr_firewall_address6_dynamicmapping:
+        bypass_validation: False
+        adom: ansible
+        address6: 'ansible-test' # name
+        state: present
+        firewall_address6_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           cache-ttl: 0
+           color: 22
+           comment: 'ansible-test-comment'
+           end-ip: '::100'
+           host: '::'
+           host-type: any #<value in [any, specific]>
+           ip6: '::/128'
+           start-ip: '::'
+           type: iprange #<value in [ipprefix, iprange, nsx, ...]>
+           visibility: enable

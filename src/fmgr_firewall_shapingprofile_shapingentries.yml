@@ -1,0 +1,30 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Define shaping entries of this shaping profile.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Define shaping entries of this shaping profile.
+     fmgr_firewall_shapingprofile_shapingentries:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        shaping-profile: 'ansible-test' # profile-name
+        state: present
+        firewall_shapingprofile_shapingentries:
+          #  class-id: <value of integer>
+           guaranteed-bandwidth-percentage: 50
+           id: 1
+           maximum-bandwidth-percentage: 70
+           priority: medium #<value in [low, medium, high]>
