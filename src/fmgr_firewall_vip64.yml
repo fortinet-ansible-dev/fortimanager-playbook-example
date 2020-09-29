@@ -1,0 +1,75 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv4, IPv6
+# Desc: Configure IPv6 to IPv4 virtual IPs.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 to IPv4 virtual IPs.
+     fmgr_firewall_vip64:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_vip64:
+           arp-reply: enable
+           color: 1
+           comment: 'anisble-comment'
+          #  dynamic_mapping:
+          #    -
+          #        _scope:
+          #          -
+          #              name: <value of string>
+          #              vdom: <value of string>
+          #        arp-reply: <value in [disable, enable]>
+          #        color: <value of integer>
+          #        comment: <value of string>
+          #        extip: <value of string>
+          #        extport: <value of string>
+          #        id: <value of integer>
+          #        ldb-method: <value in [static, round-robin, weighted, ...]>
+          #        mappedip: <value of string>
+          #        mappedport: <value of string>
+          #        monitor: <value of string>
+          #        portforward: <value in [disable, enable]>
+          #        protocol: <value in [tcp, udp]>
+          #        server-type: <value in [http, tcp, udp, ...]>
+          #        src-filter: <value of string>
+          #        type: <value in [static-nat, server-load-balance]>
+          #        uuid: <value of string>
+          #  extip: <value of string>
+          #  extport: <value of string>
+           id: 1
+          #  ldb-method: <value in [static, round-robin, weighted, ...]>
+          #  mappedip: <value of string>
+          #  mappedport: <value of string>
+          #  monitor: <value of string>
+           name: 'ansible-test-vip64'
+          #  portforward: <value in [disable, enable]>
+          #  protocol: <value in [tcp, udp]>
+          #  realservers:
+          #    -
+          #        client-ip: <value of string>
+          #        healthcheck: <value in [disable, enable, vip]>
+          #        holddown-interval: <value of integer>
+          #        id: <value of integer>
+          #        ip: <value of string>
+          #        max-connections: <value of integer>
+          #        monitor: <value of string>
+          #        port: <value of integer>
+          #        status: <value in [active, standby, disable]>
+          #        weight: <value of integer>
+          #  server-type: <value in [http, tcp, udp, ...]>
+          #  src-filter: <value of string>
+          #  type: <value in [static-nat, server-load-balance]>
+          #  uuid: <value of string>

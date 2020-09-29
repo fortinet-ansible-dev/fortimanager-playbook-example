@@ -1,0 +1,27 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Schedule group configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Schedule group configuration.
+     fmgr_firewall_schedule_group:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_schedule_group:
+           color: 1
+           member: 'none'
+           name: 'ansible-test'

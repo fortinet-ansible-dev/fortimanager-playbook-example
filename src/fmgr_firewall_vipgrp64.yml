@@ -1,0 +1,29 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall, IPv4, IPv6
+# Desc: Configure IPv6 to IPv4 virtual IP groups.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 to IPv4 virtual IP groups.
+     fmgr_firewall_vipgrp64:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_vipgrp64:
+           color: 2
+           comments: 'ansible-comment'
+           member: 'ansible-test-vip64'
+           name: 'ansible-test-vipgrp64'
+          #  uuid: <value of string>

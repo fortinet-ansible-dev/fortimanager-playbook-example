@@ -1,0 +1,90 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Admin profile.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Admin profile.
+     fmgr_system_admin_profile:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_admin_profile:
+          #  adom-lock: <value in [none, read, read-write]>
+          #  adom-policy-packages: <value in [none, read, read-write]>
+          #  adom-switch: <value in [none, read, read-write]>
+          #  app-filter: <value in [disable, enable]>
+          #  assignment: <value in [none, read, read-write]>
+          #  change-password: <value in [disable, enable]>
+          #  config-retrieve: <value in [none, read, read-write]>
+          #  config-revert: <value in [none, read, read-write]>
+          #  consistency-check: <value in [none, read, read-write]>
+          #  datamask: <value in [disable, enable]>
+          #  datamask-custom-fields:
+          #    -
+          #        field-category:
+          #          - log
+          #          - fortiview
+          #          - alert
+          #          - ueba
+          #          - all
+          #        field-name: <value of string>
+          #        field-status: <value in [disable, enable]>
+          #        field-type: <value in [string, ip, mac, ...]>
+          #  datamask-custom-priority: <value in [disable, enable]>
+          #  datamask-fields:
+          #    - user
+          #    - srcip
+          #    - srcname
+          #    - srcmac
+          #    - dstip
+          #    - dstname
+          #    - email
+          #    - message
+          #    - domain
+          #  datamask-key: <value of string>
+          #  deploy-management: <value in [none, read, read-write]>
+           description: ansible-test-description
+          #  device-ap: <value in [none, read, read-write]>
+          #  device-config: <value in [none, read, read-write]>
+          #  device-forticlient: <value in [none, read, read-write]>
+          #  device-fortiswitch: <value in [none, read, read-write]>
+          #  device-manager: <value in [none, read, read-write]>
+          #  device-op: <value in [none, read, read-write]>
+          #  device-policy-package-lock: <value in [none, read, read-write]>
+          #  device-profile: <value in [none, read, read-write]>
+          #  device-revision-deletion: <value in [none, read, read-write]>
+          #  device-wan-link-load-balance: <value in [none, read, read-write]>
+          #  event-management: <value in [none, read, read-write]>
+          #  fgd-center-advanced: <value in [none, read, read-write]>
+          #  fgd-center-fmw-mgmt: <value in [none, read, read-write]>
+          #  fgd-center-licensing: <value in [none, read, read-write]>
+          #  fgd_center: <value in [none, read, read-write]>
+          #  global-policy-packages: <value in [none, read, read-write]>
+          #  import-policy-packages: <value in [none, read, read-write]>
+          #  intf-mapping: <value in [none, read, read-write]>
+          #  ips-filter: <value in [disable, enable]>
+          #  log-viewer: <value in [none, read, read-write]>
+          #  policy-objects: <value in [none, read, read-write]>
+           profileid: ansible-test-profile
+          #  read-passwd: <value in [none, read, read-write]>
+          #  realtime-monitor: <value in [none, read, read-write]>
+          #  report-viewer: <value in [none, read, read-write]>
+           scope: adom #<value in [global, adom]>
+          #  set-install-targets: <value in [none, read, read-write]>
+          #  system-setting: <value in [none, read, read-write]>
+          #  term-access: <value in [none, read, read-write]>
+           type: system #<value in [system, restricted]>
+          #  vpn-manager: <value in [none, read, read-write]>
+          #  web-filter: <value in [disable, enable]>

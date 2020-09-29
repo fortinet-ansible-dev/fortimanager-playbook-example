@@ -1,0 +1,49 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall
+# Desc: Configure custom services.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure custom services.
+     fmgr_firewall_service_custom:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_service_custom:
+          #  app-category: <value of integer>
+           app-service-type: disable #<value in [disable, app-id, app-category]>
+          #  application: <value of integer>
+          #  category: <value of string>
+          #  check-reset-range: <value in [disable, default, strict]>
+           color: 1
+           comment: 'comment'
+          #  fqdn: <value of string>
+           helper: auto #<value in [disable, auto, ftp, ...]>
+          #  icmpcode: <value of integer>
+          #  icmptype: <value of integer>
+          #  iprange: <value of string>
+           name: 'ansible-test'
+           protocol: ALL #<value in [ICMP, IP, TCP/UDP/SCTP, ...]>
+          #  protocol-number: <value of integer>
+           proxy: enable #<value in [disable, enable]>
+          #  sctp-portrange: <value of string>
+          #  session-ttl: <value of integer>
+          #  tcp-halfclose-timer: <value of integer>
+          #  tcp-halfopen-timer: <value of integer>
+          #  tcp-portrange: <value of string>
+          #  tcp-timewait-timer: <value of integer>
+          #  udp-idle-timer: <value of integer>
+          #  udp-portrange: <value of string>
+           visibility: enable #<value in [disable, enable]>

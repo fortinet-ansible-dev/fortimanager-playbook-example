@@ -1,0 +1,57 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: SNMP community configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: SNMP community configuration.
+     fmgr_system_snmp_community:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_snmp_community:
+          #  events:
+          #    - disk_low
+          #    - ha_switch
+          #    - intf_ip_chg
+          #    - sys_reboot
+          #    - cpu_high
+          #    - mem_low
+          #    - log-alert
+          #    - log-rate
+          #    - log-data-rate
+          #    - lic-gbday
+          #    - lic-dev-quota
+          #    - cpu-high-exclude-nice
+          #  hosts:
+          #    -
+          #        id: <value of integer>
+          #        interface: <value of string>
+          #        ip: <value of string>
+          #  hosts6:
+          #    -
+          #        id: <value of integer>
+          #        interface: <value of string>
+          #        ip: <value of string>
+           id: 1
+           name: ansible-test-snmp
+          #  query_v1_port: <value of integer>
+          #  query_v1_status: <value in [disable, enable]>
+          #  query_v2c_port: <value of integer>
+          #  query_v2c_status: <value in [disable, enable]>
+           status: disable
+          #  trap_v1_rport: <value of integer>
+          #  trap_v1_status: <value in [disable, enable]>
+          #  trap_v2c_rport: <value of integer>
+          #  trap_v2c_status: <value in [disable, enable]>

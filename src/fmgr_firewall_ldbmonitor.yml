@@ -1,0 +1,33 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: 
+# Desc: Configure server load balancing health monitors
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure server load balancing health monitors.
+     fmgr_firewall_ldbmonitor:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_ldbmonitor:
+          #  http-get: <value of string>
+          #  http-match: <value of string>
+          #  http-max-redirects: <value of integer>
+          #  interval: <value of integer>
+           name: 'ansible-test'
+           port: 1
+          #  retry: <value of integer>
+          #  timeout: <value of integer>
+           type: tcp #<value in [ping, tcp, http, ...]>

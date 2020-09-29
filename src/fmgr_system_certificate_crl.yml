@@ -1,0 +1,26 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Certificate Revocation List.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Certificate Revocation List.
+     fmgr_system_certificate_crl:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_certificate_crl:
+           comment: ansible-comment
+           crl: ansible-crl
+           name: ansible-test-crl

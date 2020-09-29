@@ -1,0 +1,33 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Customized datamask fields.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Customized datamask fields.
+     fmgr_system_admin_profile_datamaskcustomfields:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        profile: ansible-test-profile # profileid
+        state: present
+        system_admin_profile_datamaskcustomfields:
+           field-category:
+             - log
+             - fortiview
+             - alert
+             - ueba
+             - all
+           field-name: ansible-test-mask
+           field-status: disable
+           field-type: string #<value in [string, ip, mac, ...]>

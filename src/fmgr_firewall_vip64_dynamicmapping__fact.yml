@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv4, IPv6
+# Desc: Retrieve all the dynamic mappings of IPv6 to IPv4 virtual IPs
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the dynamic mappings of IPv6 to IPv4 virtual IPs
+     fmgr_fact:
+       facts:
+           selector: 'firewall_vip64_dynamicmapping'
+           params:
+               adom: 'ansible' 
+               vip64: 'ansible-test-vip64' # name
+               dynamic_mapping: ''

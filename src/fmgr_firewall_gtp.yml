@@ -1,0 +1,168 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier, GTP
+# Desc: Configure GTP
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure GTP.
+     fmgr_firewall_gtp:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        state: present
+        firewall_gtp:
+          #  addr-notify: <value of string>
+          #  apn:
+          #    -
+          #        action: <value in [allow, deny]>
+          #        apnmember: <value of string>
+          #        id: <value of integer>
+          #        selection-mode:
+          #          - ms
+          #          - net
+          #          - vrf
+          #  apn-filter: <value in [disable, enable]>
+          #  authorized-ggsns: <value of string>
+          #  authorized-sgsns: <value of string>
+          #  comment: <value of string>
+          #  context-id: <value of integer>
+          #  control-plane-message-rate-limit: <value of integer>
+          #  default-apn-action: <value in [allow, deny]>
+          #  default-imsi-action: <value in [allow, deny]>
+          #  default-ip-action: <value in [allow, deny]>
+          #  default-noip-action: <value in [allow, deny]>
+          #  default-policy-action: <value in [allow, deny]>
+          #  denied-log: <value in [disable, enable]>
+          #  echo-request-interval: <value of integer>
+          #  extension-log: <value in [disable, enable]>
+          #  forwarded-log: <value in [disable, enable]>
+          #  global-tunnel-limit: <value of string>
+          #  gtp-in-gtp: <value in [allow, deny]>
+          #  gtpu-denied-log: <value in [disable, enable]>
+          #  gtpu-forwarded-log: <value in [disable, enable]>
+          #  gtpu-log-freq: <value of integer>
+          #  half-close-timeout: <value of integer>
+          #  half-open-timeout: <value of integer>
+          #  handover-group: <value of string>
+          #  ie-remove-policy:
+          #    -
+          #        id: <value of integer>
+          #        remove-ies:
+          #          - apn-restriction
+          #          - rat-type
+          #          - rai
+          #          - uli
+          #          - imei
+          #        sgsn-addr: <value of string>
+          #  ie-remover: <value in [disable, enable]>
+          #  ie-white-list-v0v1: <value of string>
+          #  ie-white-list-v2: <value of string>
+          #  imsi:
+          #    -
+          #        action: <value in [allow, deny]>
+          #        apnmember: <value of string>
+          #        id: <value of integer>
+          #        mcc-mnc: <value of string>
+          #        msisdn-prefix: <value of string>
+          #        selection-mode:
+          #          - ms
+          #          - net
+          #          - vrf
+          #  imsi-filter: <value in [disable, enable]>
+          #  interface-notify: <value of string>
+          #  invalid-reserved-field: <value in [allow, deny]>
+          #  invalid-sgsns-to-log: <value of string>
+          #  ip-filter: <value in [disable, enable]>
+          #  ip-policy:
+          #    -
+          #        action: <value in [allow, deny]>
+          #        dstaddr: <value of string>
+          #        id: <value of integer>
+          #        srcaddr: <value of string>
+          #  log-freq: <value of integer>
+          #  log-gtpu-limit: <value of integer>
+          #  log-imsi-prefix: <value of string>
+          #  log-msisdn-prefix: <value of string>
+          #  max-message-length: <value of integer>
+          #  message-filter-v0v1: <value of string>
+          #  message-filter-v2: <value of string>
+          #  min-message-length: <value of integer>
+          #  miss-must-ie: <value in [allow, deny]>
+           monitor-mode: disable #<value in [disable, enable, vdom]>
+           name: 'ansible-test'
+          #  noip-filter: <value in [disable, enable]>
+          #  noip-policy:
+          #    -
+          #        action: <value in [allow, deny]>
+          #        end: <value of integer>
+          #        id: <value of integer>
+          #        start: <value of integer>
+          #        type: <value in [etsi, ietf]>
+          #  out-of-state-ie: <value in [allow, deny]>
+          #  out-of-state-message: <value in [allow, deny]>
+          #  per-apn-shaper:
+          #    -
+          #        apn: <value of string>
+          #        id: <value of integer>
+          #        rate-limit: <value of integer>
+          #        version: <value of integer>
+          #  policy:
+          #    -
+          #        action: <value in [allow, deny]>
+          #        apn-sel-mode:
+          #          - ms
+          #          - net
+          #          - vrf
+          #        apnmember: <value of string>
+          #        id: <value of integer>
+          #        imei: <value of string>
+          #        imsi: <value of string>
+          #        max-apn-restriction: <value in [all, public-1, public-2, ...]>
+          #        messages:
+          #          - create-req
+          #          - create-res
+          #          - update-req
+          #          - update-res
+          #        msisdn: <value of string>
+          #        rai: <value of string>
+          #        rat-type:
+          #          - any
+          #          - utran
+          #          - geran
+          #          - wlan
+          #          - gan
+          #          - hspa
+          #          - eutran
+          #          - virtual
+          #          - nbiot
+          #        uli: <value of string>
+          #  policy-filter: <value in [disable, enable]>
+          #  port-notify: <value of integer>
+          #  rate-limit-mode: <value in [per-profile, per-stream, per-apn]>
+          #  rate-limited-log: <value in [disable, enable]>
+          #  rate-sampling-interval: <value of integer>
+          #  remove-if-echo-expires: <value in [disable, enable]>
+          #  remove-if-recovery-differ: <value in [disable, enable]>
+          #  reserved-ie: <value in [allow, deny]>
+          #  send-delete-when-timeout: <value in [disable, enable]>
+          #  send-delete-when-timeout-v2: <value in [disable, enable]>
+          #  spoof-src-addr: <value in [allow, deny]>
+          #  state-invalid-log: <value in [disable, enable]>
+          #  traffic-count-log: <value in [disable, enable]>
+          #  tunnel-limit: <value of integer>
+          #  tunnel-limit-log: <value in [disable, enable]>
+          #  tunnel-timeout: <value of integer>
+          #  unknown-version-action: <value in [allow, deny]>
+          #  user-plane-message-rate-limit: <value of integer>
+          #  warning-threshold: <value of integer>

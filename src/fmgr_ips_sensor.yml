@@ -1,0 +1,85 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: IPS
+# Desc: Configure IPS sensor.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPS sensor.
+     fmgr_ips_sensor:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        ips_sensor:
+           block-malicious-url: disable
+           comment: 'ansible-comment'
+          #  entries:
+          #    -
+          #        action: <value in [pass, block, reset, ...]>
+          #        application: <value of string>
+          #        exempt-ip:
+          #          -
+          #              dst-ip: <value of string>
+          #              id: <value of integer>
+          #              src-ip: <value of string>
+          #        id: <value of integer>
+          #        location: <value of string>
+          #        log: <value in [disable, enable]>
+          #        log-attack-context: <value in [disable, enable]>
+          #        log-packet: <value in [disable, enable]>
+          #        os: <value of string>
+          #        protocol: <value of string>
+          #        quarantine: <value in [none, attacker, both, ...]>
+          #        quarantine-expiry: <value of string>
+          #        quarantine-log: <value in [disable, enable]>
+          #        rate-count: <value of integer>
+          #        rate-duration: <value of integer>
+          #        rate-mode: <value in [periodical, continuous]>
+          #        rate-track: <value in [none, src-ip, dest-ip, ...]>
+          #        rule: <value of string>
+          #        severity: <value of string>
+          #        status: <value in [disable, enable, default]>
+          #  extended-log: <value in [disable, enable]>
+          #  filter:
+          #    -
+          #        action: <value in [pass, block, default, ...]>
+          #        application: <value of string>
+          #        location: <value of string>
+          #        log: <value in [disable, enable, default]>
+          #        log-packet: <value in [disable, enable, default]>
+          #        name: <value of string>
+          #        os: <value of string>
+          #        protocol: <value of string>
+          #        quarantine: <value in [none, attacker, both, ...]>
+          #        quarantine-expiry: <value of integer>
+          #        quarantine-log: <value in [disable, enable]>
+          #        severity: <value of string>
+          #        status: <value in [disable, enable, default]>
+           name: 'ansible-test-ipssensor'
+          #  override:
+          #    -
+          #        action: <value in [pass, block, reset]>
+          #        exempt-ip:
+          #          -
+          #              dst-ip: <value of string>
+          #              id: <value of integer>
+          #              src-ip: <value of string>
+          #        log: <value in [disable, enable]>
+          #        log-packet: <value in [disable, enable]>
+          #        quarantine: <value in [none, attacker, both, ...]>
+          #        quarantine-expiry: <value of integer>
+          #        quarantine-log: <value in [disable, enable]>
+          #        rule-id: <value of integer>
+          #        status: <value in [disable, enable]>
+          #  replacemsg-group: <value of string>

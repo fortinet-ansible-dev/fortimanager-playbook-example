@@ -1,0 +1,55 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Alert events.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Alert events.
+     fmgr_system_alertevent:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_alertevent:
+          #  alert-destination:
+          #    -
+          #        from: <value of string>
+          #        smtp-name: <value of string>
+          #        snmp-name: <value of string>
+          #        syslog-name: <value of string>
+          #        to: <value of string>
+          #        type: <value in [mail, snmp, syslog]>
+           enable-generic-text:
+             - enable
+             - disable
+           enable-severity-filter:
+             - enable
+             - disable
+           event-time-period: 1 #<value in [0.5, 1, 3, ...]>
+          #  generic-text: <value of string>
+           name: ansible-test-sysalert
+           num-events: 1 #<value in [1, 5, 10, ...]>
+           severity-filter: high #<value in [high, medium-high, medium, ...]>
+           severity-level-comp:
+            #  - >=
+            #  - =
+             - <=
+           severity-level-logs:
+             - no-check
+             - information
+             - notify
+             - warning
+             - error
+             - critical
+             - alert
+             - emergency

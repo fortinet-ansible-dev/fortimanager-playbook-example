@@ -1,0 +1,26 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Configure service categories.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure service categories.
+     fmgr_firewall_service_category:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_service_category:
+           comment: 'ansible-comment'
+           name: 'ansible-test'

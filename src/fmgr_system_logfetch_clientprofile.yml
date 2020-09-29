@@ -1,0 +1,51 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Log-fetch client profile settings.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Log-fetch client profile settings.
+     fmgr_system_logfetch_clientprofile:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_logfetch_clientprofile:
+           client-adom: ansible
+           data-range: custom #<value in [custom]>
+          #  data-range-value: <value of integer>
+          #  device-filter:
+          #    -
+          #        adom: <value of string>
+          #        device: <value of string>
+          #        id: <value of integer>
+          #        vdom: <value of string>
+          #  end-time: <value of string>
+           id: 1
+           index-fetch-logs: enable
+          #  log-filter:
+          #    -
+          #        field: <value of string>
+          #        id: <value of integer>
+          #        oper: <value in [=, !=, <, ...]>
+          #        value: <value of string>
+          #  log-filter-logic: <value in [and, or]>
+          #  log-filter-status: <value in [disable, enable]>
+           name: ansible-test-clientprofile
+           password: fortinet
+          #  secure-connection: <value in [disable, enable]>
+          #  server-adom: <value of string>
+           server-ip: '222.222.22.25'
+          #  start-time: <value of string>
+          #  sync-adom-config: <value in [disable, enable]>
+           user: ansible

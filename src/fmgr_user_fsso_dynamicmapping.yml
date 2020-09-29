@@ -1,0 +1,52 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: user
+# Desc: Configure dynamic mappings of Fortinet Single Sign On (FSSO) agent
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of Fortinet Single Sign On (FSSO) agent
+     fmgr_user_fsso_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        fsso: ansible-fsso # name
+        state: present
+        user_fsso_dynamicmapping:
+          #  _gui_meta: <value of string>
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+          #  ldap-server: <value of string>
+           password: fortinet
+          #  password2: <value of string>
+          #  password3: <value of string>
+          #  password4: <value of string>
+          #  password5: <value of string>
+           port: 9000
+          #  port2: <value of integer>
+          #  port3: <value of integer>
+          #  port4: <value of integer>
+          #  port5: <value of integer>
+           server: ansible
+          #  server2: <value of string>
+          #  server3: <value of string>
+          #  server4: <value of string>
+          #  server5: <value of string>
+          #  source-ip: <value of string>
+          #  source-ip6: <value of string>
+          #  ssl: <value in [disable, enable]>
+          #  ssl-trusted-cert: <value of string>
+          #  type: <value in [default, fortiems, fortinac]>
+          #  user-info-server: <value of string>

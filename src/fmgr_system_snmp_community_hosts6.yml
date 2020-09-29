@@ -1,0 +1,27 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system, IPv6
+# Desc: Allow hosts configuration for IPv6.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Allow hosts configuration for IPv6.
+     fmgr_system_snmp_community_hosts6:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        community: 1 # id
+        state: present
+        system_snmp_community_hosts6:
+           id: 1
+           interface: port1
+           ip: 2001::/96

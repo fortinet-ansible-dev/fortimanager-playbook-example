@@ -1,0 +1,24 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv6
+# Desc: Retrieve all the IP address lists
+- name: gathering fortimanager facts
+  hosts: fortimanager00
+  gather_facts: no
+  connection: httpapi
+  collections:
+    - fortinet.fortimanager
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_httpapi_port: 443
+  tasks:
+   - name: retrieve all the IP address lists
+     fmgr_fact:
+       facts:
+           selector: 'firewall_address6_list'
+           params:
+               adom: 'ansible'
+               address6: 'ansible-test' # name
+               list: ''

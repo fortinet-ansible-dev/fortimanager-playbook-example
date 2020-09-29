@@ -1,0 +1,47 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall, IPv4, IPv6
+# Desc: Configure IPv6 to IPv4 policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 to IPv4 policies.
+     fmgr_pkg_firewall_policy64:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_policy64:
+           action: accept #<value in [deny, accept]>
+           comments: ansible-comment
+           dstaddr: all
+           dstintf: any
+          #  fixedport: <value in [disable, enable]>
+          #  ippool: <value in [disable, enable]>
+          #  logtraffic: <value in [disable, enable]>
+          #  per-ip-shaper: <value of string>
+          #  permit-any-host: <value in [disable, enable]>
+           policyid: 1
+          #  poolname: <value of string>
+           schedule: always
+           service: ALL
+           srcaddr: all
+           srcintf: any
+           status: disable
+          #  tags: <value of string>
+          #  tcp-mss-receiver: <value of integer>
+          #  tcp-mss-sender: <value of integer>
+          #  traffic-shaper: <value of string>
+          #  traffic-shaper-reverse: <value of string>
+          #  uuid: <value of string>

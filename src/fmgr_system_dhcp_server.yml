@@ -1,0 +1,90 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system, DHCP
+# Desc: Configure DHCP servers.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure DHCP servers.
+     fmgr_system_dhcp_server:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        system_dhcp_server:
+           auto-configuration: enable #<value in [disable, enable]>
+          #  conflicted-ip-timeout: <value of integer>
+          #  ddns-auth: <value in [disable, tsig]>
+          #  ddns-key: <value of string>
+          #  ddns-keyname: <value of string>
+          #  ddns-server-ip: <value of string>
+          #  ddns-ttl: <value of integer>
+          #  ddns-update: <value in [disable, enable]>
+          #  ddns-update-override: <value in [disable, enable]>
+          #  ddns-zone: <value of string>
+           default-gateway: '222.222.222.1'
+          #  dns-server1: <value of string>
+          #  dns-server2: <value of string>
+          #  dns-server3: <value of string>
+          #  dns-service: <value in [default, specify, local]>
+          #  domain: <value of string>
+          #  exclude-range:
+          #    -
+          #        end-ip: <value of string>
+          #        id: <value of integer>
+          #        start-ip: <value of string>
+           filename: ansible-file
+          #  forticlient-on-net-status: <value in [disable, enable]>
+           id: 1
+           interface: any
+           ip-mode: range #<value in [range, usrgrp]>
+           ip-range:
+             -
+                 end-ip: 222.222.222.22
+                 id: 1
+                 start-ip: 222.222.222.2
+          #  ipsec-lease-hold: <value of integer>
+          #  lease-time: <value of integer>
+          #  mac-acl-default-action: <value in [assign, block]>
+           netmask: 255.255.255.0
+          #  next-server: <value of string>
+          #  ntp-server1: <value of string>
+          #  ntp-server2: <value of string>
+          #  ntp-server3: <value of string>
+          #  ntp-service: <value in [default, specify, local]>
+          #  options:
+          #    -
+          #        code: <value of integer>
+          #        id: <value of integer>
+          #        ip: <value of string>
+          #        type: <value in [hex, string, ip, ...]>
+          #        value: <value of string>
+          #  reserved-address:
+          #    -
+          #        action: <value in [assign, block, reserved]>
+          #        description: <value of string>
+          #        id: <value of integer>
+          #        ip: <value of string>
+          #        mac: <value of string>
+           server-type: regular #<value in [regular, ipsec]>
+           status: disable #<value in [disable, enable]>
+          #  tftp-server: <value of string>
+          #  timezone: <value in [00, 01, 02, ...]>
+          #  timezone-option: <value in [disable, default, specify]>
+          #  vci-match: <value in [disable, enable]>
+          #  vci-string: <value of string>
+          #  wifi-ac1: <value of string>
+          #  wifi-ac2: <value of string>
+          #  wifi-ac3: <value of string>
+          #  wins-server1: <value of string>
+          #  wins-server2: <value of string>

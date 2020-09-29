@@ -1,0 +1,28 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system, DHCP
+# Desc: DHCP IP range configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: DHCP IP range configuration.
+     fmgr_system_dhcp_server_iprange:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        server: 1 # id
+        state: present
+        system_dhcp_server_iprange:
+           end-ip: 222.222.222.35
+           id: 2
+           start-ip: 222.222.222.23

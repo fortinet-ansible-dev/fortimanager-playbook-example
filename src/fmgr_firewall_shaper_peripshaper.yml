@@ -1,0 +1,32 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Configure per-IP traffic shaper.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure per-IP traffic shaper.
+     fmgr_firewall_shaper_peripshaper:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_shaper_peripshaper:
+           bandwidth-unit: mbps #<value in [kbps, mbps, gbps]>
+           diffserv-forward: enable
+           diffserv-reverse: disable
+          #  diffservcode-forward: <value of string>
+          #  diffservcode-rev: <value of string>
+          #  max-bandwidth: <value of integer>
+          #  max-concurrent-session: <value of integer>
+           name: 'ansible-test'

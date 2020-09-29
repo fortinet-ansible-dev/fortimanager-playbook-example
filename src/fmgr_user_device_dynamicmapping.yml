@@ -1,0 +1,37 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: Configure dynamic mappings
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings
+     fmgr_user_device_dynamicmapping:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        device: ansible-test-device # alias
+        state: present
+        user_device_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+          #  avatar: <value of string>
+           category: none #<value in [none, android-device, blackberry-device, ...]>
+           comment: ansible-comment
+          #  mac: '::'
+          #  master-device: <value of string>
+          #  tags: <value of string>
+           type: iphone #<value in [ipad, iphone, gaming-console, ...]>
+          #  user: <value of string>

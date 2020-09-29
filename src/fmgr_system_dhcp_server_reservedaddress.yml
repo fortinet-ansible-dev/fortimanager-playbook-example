@@ -1,0 +1,30 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system, DHCP
+# Desc: Options for the DHCP server to assign IP settings to specific MAC addresses.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Options for the DHCP server to assign IP settings to specific MAC addresses.
+     fmgr_system_dhcp_server_reservedaddress:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        server: 1 # id
+        state: present
+        system_dhcp_server_reservedaddress:
+           action: assign #<value in [assign, block, reserved]>
+           description: ansible-description
+           id: 1
+           ip: 222.222.222.1
+          #  mac: 5c:11:11:11:11

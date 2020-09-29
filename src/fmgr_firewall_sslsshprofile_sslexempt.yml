@@ -1,0 +1,32 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Servers to exempt from SSL inspection.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Servers to exempt from SSL inspection.
+     fmgr_firewall_sslsshprofile_sslexempt:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        ssl-ssh-profile: 'ansible-test' # name
+        state: present
+        firewall_sslsshprofile_sslexempt:
+          #  address: '222.222.222.1'
+          #  address6: '2001::1'
+          #  fortiguard-category: <value of string>
+           id: 1
+          #  regex: <value of string>
+           type: address6 #<value in [fortiguard-category, address, address6, ...]>
+          #  wildcard-fqdn: <value of string>

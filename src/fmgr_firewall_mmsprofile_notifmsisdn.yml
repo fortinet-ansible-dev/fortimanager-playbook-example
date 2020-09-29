@@ -1,0 +1,33 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.24
+# Label: FortiCarrier
+# Desc: Notification for MSISDNs
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Notification for MSISDNs.
+     fmgr_firewall_mmsprofile_notifmsisdn:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # This is FOC-only object, need a FortiCarrier adom
+        mms-profile: 'ansible-test' # name
+        state: present
+        firewall_mmsprofile_notifmsisdn:
+           msisdn: 'ansible'
+           threshold:
+             - flood-thresh-1
+             - flood-thresh-2
+             - flood-thresh-3
+             - dupe-thresh-1
+             - dupe-thresh-2
+             - dupe-thresh-3

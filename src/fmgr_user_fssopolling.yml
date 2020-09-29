@@ -1,0 +1,38 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: user
+# Desc: Configure FSSO active directory servers for polling mode.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure FSSO active directory servers for polling mode.
+     fmgr_user_fssopolling:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        user_fssopolling:
+          #  _gui_meta: <value of string>
+          #  adgrp:
+          #    -
+          #        name: <value of string>
+          #  default-domain: <value of string>
+           id: 1
+          #  ldap-server: <value of string>
+          #  logon-history: <value of integer>
+           password: fortinet
+          #  polling-frequency: <value of integer>
+           port: 8000
+           server: ansible
+           status: disable
+          #  user: <value of string>

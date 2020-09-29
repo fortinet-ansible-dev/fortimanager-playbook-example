@@ -1,0 +1,32 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.28
+# Label: firewall, IPv6
+# Desc: Configure dynamic mappings of IPv6 IP pool
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure dynamic mappings of IPv6 IP pool
+     fmgr_firewall_ippool6_dynamicmapping:
+        bypass_validation: True
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        ippool6: 'ansible-test'
+        state: present
+        firewall_ippool6_dynamicmapping:
+           _scope:
+             -
+                 name: FGT_AWS # need a valid device name
+                 vdom: root # need a valid vdom name under the device
+           comments: 'ansible-test'
+           endip: '2001::101'
+           startip: '2001::0'

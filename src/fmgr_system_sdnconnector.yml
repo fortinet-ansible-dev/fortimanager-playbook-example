@@ -1,0 +1,82 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: system
+# Desc: Configure connection to SDN Connector.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure connection to SDN Connector.
+     fmgr_system_sdnconnector:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        system_sdnconnector:
+          #  _local_cert: <value of string>
+          #  access-key: <value of string>
+           azure-region: global #<value in [global, china, germany, ...]>
+          #  client-id: <value of string>
+          #  client-secret: <value of string>
+           compartment-id: 1
+          #  external-ip:
+          #    -
+          #        name: <value of string>
+          #  gcp-project: <value of string>
+          #  key-passwd: <value of string>
+          #  login-endpoint: <value of string>
+           name: ansible-test-sdn
+          #  nic:
+          #    -
+          #        ip:
+          #          -
+          #              name: <value of string>
+          #              public-ip: <value of string>
+          #        name: <value of string>
+          #  nsx-cert-fingerprint: <value of string>
+          #  oci-cert: <value of string>
+          #  oci-fingerprint: <value of string>
+          #  oci-region: <value in [phoenix, ashburn, frankfurt, ...]>
+           password: fortinet
+          #  private-key: <value of string>
+          #  region: <value of string>
+          #  resource-group: <value of string>
+          #  resource-url: <value of string>
+          #  rest-interface: <value in [mgmt, sync]>
+          #  rest-password: <value of string>
+          #  rest-sport: <value of integer>
+          #  rest-ssl: <value in [disable, enable]>
+          #  route:
+          #    -
+          #        name: <value of string>
+          #  route-table:
+          #    -
+          #        name: <value of string>
+          #        route:
+          #          -
+          #              name: <value of string>
+          #              next-hop: <value of string>
+          #  secret-key: <value of string>
+           server: ALL
+          #  server-port: <value of integer>
+          #  service-account: <value of string>
+           status: disable
+          #  subscription-id: <value of string>
+          #  tenant-id: <value of string>
+           type: aws #<value in [aci, aws, nsx, ...]>
+          #  update-interval: <value of integer>
+          #  use-metadata-iam: <value in [disable, enable]>
+          #  user-id: <value of string>
+          #  username: <value of string>
+          #  vmx-image-url: <value of string>
+          #  vmx-service-name: <value of string>
+          #  vpc-id: <value of string>

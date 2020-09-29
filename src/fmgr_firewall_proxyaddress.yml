@@ -1,0 +1,65 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: firewall
+# Desc: Web proxy address configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Web proxy address configuration.
+     fmgr_firewall_proxyaddress:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        state: present
+        firewall_proxyaddress:
+           case-sensitivity: disable
+          #  category: 'ansible-category'
+           color: 1
+           comment: 'ansible-comment'
+          #  header: <value of string>
+          #  header-group:
+          #    -
+          #        case-sensitivity: <value in [disable, enable]>
+          #        header: <value of string>
+          #        header-name: <value of string>
+          #        id: <value of integer>
+          #  header-name: <value of string>
+          #  host: <value of string>
+          #  host-regex: <value of string>
+          #  method:
+          #    - delete
+          #    - get
+          #    - head
+          #    - options
+          #    - post
+          #    - put
+          #    - trace
+          #    - connect
+           name: 'ansible-test'
+          #  path: <value of string>
+          #  query: <value of string>
+          #  referrer: <value in [disable, enable]>
+          #  tagging:
+          #    -
+          #        category: <value of string>
+          #        name: <value of string>
+          #        tags: <value of string>
+          #  type: <value in [host-regex, url, category, ...]>
+          #  ua:
+          #    - chrome
+          #    - ms
+          #    - firefox
+          #    - safari
+          #    - other
+          #  uuid: <value of string>
+          #  visibility: <value in [disable, enable]>

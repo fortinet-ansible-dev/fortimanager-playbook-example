@@ -1,0 +1,43 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.25
+# Label: package, firewall
+# Desc: Configure shaping policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure shaping policies.
+     fmgr_pkg_firewall_shapingpolicy:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        pkg: ansible # package name
+        state: present
+        pkg_firewall_shapingpolicy:
+          #  app-category: <value of string>
+          #  application: <value of integer>
+           dstaddr: all
+          #  dstaddr6: <value of string>
+           dstintf: any
+          #  groups: <value of string>
+           id: 1
+           ip-version: 4 #<value in [4, 6]>
+          #  per-ip-shaper: <value of string>
+           schedule: always
+           service: ALL
+           srcaddr: all
+          #  srcaddr6: <value of string>
+           status: disable
+          #  traffic-shaper: <value of string>
+          #  traffic-shaper-reverse: <value of string>
+          #  url-category: <value of string>
+          #  users: <value of string>
