@@ -1,0 +1,44 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.09.29
+# Label: deamon
+# Desc: Copy and install a policy package to devices.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Copy and install a policy package to devices.
+     fmgr_securityconsole_install_package:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        securityconsole_install_package:
+           adom: ansible
+           adom_rev_comments: ansible-comment
+           adom_rev_name: ansible-test
+           dev_rev_comments: ansible-comment
+           flags:
+             - none
+             - cp_all_objs
+             - preview
+             - generate_rev
+             - copy_assigned_pkg
+             - unassign
+             - ifpolicy_only
+             - no_ifpolicy
+             - objs_only
+             - auto_lock_ws
+             - check_pkg_st
+             - copy_only
+           pkg: ansible
+           scope:
+             -
+                 name: ansible-test
+                 vdom: root

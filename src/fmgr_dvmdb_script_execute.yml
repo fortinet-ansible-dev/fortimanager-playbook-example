@@ -1,8 +1,8 @@
 # Author: Xing Li
 # Org: Fortinet
-# Date: 2020.09.25
-# Label: system
-# Desc: Peer.
+# Date: 2020.09.29
+# Label: deamon
+# Desc: Run script.
 - hosts: fortimanager00
   collections:
     - fortinet.fortimanager
@@ -12,16 +12,19 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
-   - name: Peer.
-     fmgr_system_ha_peer:
+   - name: Run script.
+     fmgr_dvmdb_script_execute:
         bypass_validation: False
         # workspace_locking_adom: <value in [global, custom adom including root]>
         # workspace_locking_timeout: 300
         # rc_succeeded: [0, -2, -3, ...]
         # rc_failed: [-2, -3, ...]
-        state: present
-        system_ha_peer:
-           id: 3
-           ip: '11.11.11.5' # Required, could not be 0.0.0.0
-          #  ip6: '::'
-           serial-number: FMG-VM0000000003 # need a valid serial number
+        adom: ansible
+        dvmdb_script_execute:
+           adom: ansible
+           package: ''
+           scope:
+             -
+                 name: ansible-test
+                 vdom: root
+           script: ansible-test

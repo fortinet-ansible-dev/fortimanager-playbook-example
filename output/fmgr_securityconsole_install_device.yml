@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: 
+     fmgr_securityconsole_install_device:
+        bypass_validation: False
+        securityconsole_install_device:
+           adom: ansible
+           dev_rev_comments: ansible-comment
+           flags:
+             - none
+             - preview
+             - auto_lock_ws
+           scope:
+             -
+                 name: ansible-test
+                 vdom: root

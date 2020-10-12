@@ -1,0 +1,27 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: 
+     fmgr_pm_devprof_adom:
+        adom: ansible
+        pm_devprof_adom:
+           description: 'ansible-test'
+           enabled options:
+             - none
+             - dns
+             - ntp
+             - email
+             - admin
+             - snmp
+             - repmsg
+             - ftgd
+             - log
+           name: 'ansible-test'
+           oid: 1500
+           type: devprof
