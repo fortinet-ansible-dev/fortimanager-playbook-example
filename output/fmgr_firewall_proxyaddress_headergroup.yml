@@ -1,0 +1,20 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: HTTP header group.
+     fmgr_firewall_proxyaddress_headergroup:
+        bypass_validation: False
+        adom: ansible
+        proxy-address: 'ansible-test' # name
+        state: present
+        firewall_proxyaddress_headergroup: # available only when type is set to "Advanced(Source)" in prox-address
+           case-sensitivity: disable
+           header: ansible-test-header
+           header-name: ansible-test-header
+           id: 1

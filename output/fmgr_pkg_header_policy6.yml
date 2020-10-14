@@ -1,0 +1,26 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 header policies.
+     fmgr_pkg_header_policy6:
+        bypass_validation: False
+        pkg: ansible
+        state: present
+        pkg_header_policy6:
+           action: accept #<value in [deny, accept, ipsec, ...]>
+           comments: ansible-comment
+           dstaddr: gall
+           dstintf: any
+           name: ansible-test2-header
+           policyid: 1073741827 # must larger than 2^30(1074741824), since header/footer policy is a special policy
+           schedule: galways
+           service: gALL
+           srcaddr: gall
+           srcintf: any
+           status: enable

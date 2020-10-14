@@ -1,0 +1,36 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.10.13
+# Label: firewall, IPv4
+# Desc: Select the real servers that this server load balancing VIP will distribute traffic to.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Select the real servers that this server load balancing VIP will distribute traffic to.
+     fmgr_firewall_vip_realservers:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: ansible
+        vip: 'ansible-test-vip' # name
+        state: present
+        firewall_vip_realservers: # available only when type is set to 'server-load-balance' in vip
+          #  client-ip: <value of string>
+           healthcheck: enable #<value in [disable, enable, vip]>
+          #  holddown-interval: <value of integer>
+          #  http-host: <value of string>
+           ip: '222.222.222.1'
+          #  max-connections: <value of integer>
+          #  monitor: <value of string>
+           port: 1
+           seq: 1
+           status: active #<value in [active, standby, disable]>
+          #  weight: 1

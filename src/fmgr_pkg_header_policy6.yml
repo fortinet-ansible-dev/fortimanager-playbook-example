@@ -1,0 +1,177 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.10.13
+# Label: package, IPv6
+# Desc: Configure IPv6 header policies.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv6 header policies.
+     fmgr_pkg_header_policy6:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        pkg: ansible
+        state: present
+        pkg_header_policy6:
+           action: accept #<value in [deny, accept, ipsec, ...]>
+          #  anti-replay: <value in [disable, enable]>
+          #  app-category: <value of string>
+          #  app-group: <value of string>
+          #  application: <value of integer>
+          #  application-charts:
+          #    - top10-app
+          #    - top10-p2p-user
+          #    - top10-media-user
+          #  application-list: <value of string>
+          #  auto-asic-offload: <value in [disable, enable]>
+          #  av-profile: <value of string>
+          #  casi-profile: <value of string>
+          #  cifs-profile: <value of string>
+           comments: ansible-comment
+          #  custom-log-fields: <value of string>
+          #  deep-inspection-options: <value of string>
+          #  device-detection-portal: <value in [disable, enable]>
+          #  devices: <value of string>
+          #  diffserv-forward: <value in [disable, enable]>
+          #  diffserv-reverse: <value in [disable, enable]>
+          #  diffservcode-forward: <value of string>
+          #  diffservcode-rev: <value of string>
+          #  dlp-sensor: <value of string>
+          #  dnsfilter-profile: <value of string>
+          #  dscp-match: <value in [disable, enable]>
+          #  dscp-negate: <value in [disable, enable]>
+          #  dscp-value: <value of string>
+          #  dsri: <value in [disable, enable]>
+           dstaddr: gall
+          #  dstaddr-negate: <value in [disable, enable]>
+           dstintf: any
+          #  dynamic-profile: <value in [disable, enable]>
+          #  dynamic-profile-access:
+          #    - imap
+          #    - smtp
+          #    - pop3
+          #    - http
+          #    - ftp
+          #    - im
+          #    - nntp
+          #    - imaps
+          #    - smtps
+          #    - pop3s
+          #    - https
+          #    - ftps
+          #  dynamic-profile-group: <value of string>
+          #  email-collection-portal: <value in [disable, enable]>
+          #  emailfilter-profile: <value of string>
+          #  firewall-session-dirty: <value in [check-all, check-new]>
+          #  fixedport: <value in [disable, enable]>
+          #  fsae: <value in [disable, enable]>
+          #  global-label: <value of string>
+          #  groups: <value of string>
+          #  http-policy-redirect: <value in [disable, enable]>
+          #  icap-profile: <value of string>
+          #  identity-based: <value in [disable, enable]>
+          #  identity-based-policy6:
+          #    -
+          #        action: <value in [deny, accept]>
+          #        application-list: <value of string>
+          #        av-profile: <value of string>
+          #        deep-inspection-options: <value of string>
+          #        devices: <value of string>
+          #        dlp-sensor: <value of string>
+          #        endpoint-compliance: <value in [disable, enable]>
+          #        groups: <value of string>
+          #        icap-profile: <value of string>
+          #        id: <value of integer>
+          #        ips-sensor: <value of string>
+          #        logtraffic: <value in [disable, enable, all, ...]>
+          #        mms-profile: <value of string>
+          #        per-ip-shaper: <value of string>
+          #        profile-group: <value of string>
+          #        profile-protocol-options: <value of string>
+          #        profile-type: <value in [single, group]>
+          #        replacemsg-group: <value of string>
+          #        schedule: <value of string>
+          #        send-deny-packet: <value in [disable, enable]>
+          #        service: <value of string>
+          #        service-negate: <value in [disable, enable]>
+          #        spamfilter-profile: <value of string>
+          #        sslvpn-portal: <value of string>
+          #        sslvpn-realm: <value of string>
+          #        traffic-shaper: <value of string>
+          #        traffic-shaper-reverse: <value of string>
+          #        utm-status: <value in [disable, enable]>
+          #        voip-profile: <value of string>
+          #        webfilter-profile: <value of string>
+          #  identity-from: <value in [auth, device]>
+          #  inbound: <value in [disable, enable]>
+          #  inspection-mode: <value in [proxy, flow]>
+          #  ippool: <value in [disable, enable]>
+          #  ips-sensor: <value of string>
+          #  label: <value of string>
+          #  logtraffic: <value in [disable, enable, all, ...]>
+          #  logtraffic-start: <value in [disable, enable]>
+          #  mms-profile: <value of string>
+           name: ansible-test2-header
+          #  nat: <value in [disable, enable]>
+          #  natinbound: <value in [disable, enable]>
+          #  natoutbound: <value in [disable, enable]>
+          #  np-accelation: <value in [disable, enable]>
+          #  np-acceleration: <value in [disable, enable]>
+          #  outbound: <value in [disable, enable]>
+          #  per-ip-shaper: <value of string>
+           policyid: 1073741827 # must larger than 2^30(1074741824), since header/footer policy is a special policy
+          #  poolname: <value of string>
+          #  profile-group: <value of string>
+          #  profile-protocol-options: <value of string>
+          #  profile-type: <value in [single, group]>
+          #  replacemsg-group: <value of string>
+          #  replacemsg-override-group: <value of string>
+          #  rsso: <value in [disable, enable]>
+           schedule: galways
+          #  send-deny-packet: <value in [disable, enable]>
+           service: gALL
+          #  service-negate: <value in [disable, enable]>
+          #  session-ttl: <value of integer>
+          #  spamfilter-profile: <value of string>
+           srcaddr: gall
+          #  srcaddr-negate: <value in [disable, enable]>
+           srcintf: any
+          #  ssh-filter-profile: <value of string>
+          #  ssh-policy-redirect: <value in [disable, enable]>
+          #  ssl-mirror: <value in [disable, enable]>
+          #  ssl-mirror-intf: <value of string>
+          #  ssl-ssh-profile: <value of string>
+          #  sslvpn-auth: <value in [any, local, radius, ...]>
+          #  sslvpn-ccert: <value in [disable, enable]>
+          #  sslvpn-cipher: <value in [any, high, medium]>
+           status: enable
+          #  tags: <value of string>
+          #  tcp-mss-receiver: <value of integer>
+          #  tcp-mss-sender: <value of integer>
+          #  tcp-session-without-syn: <value in [all, data-only, disable]>
+          #  timeout-send-rst: <value in [disable, enable]>
+          #  tos: <value of string>
+          #  tos-mask: <value of string>
+          #  tos-negate: <value in [disable, enable]>
+          #  traffic-shaper: <value of string>
+          #  traffic-shaper-reverse: <value of string>
+          #  url-category: <value of string>
+          #  users: <value of string>
+          #  utm-inspection-mode: <value in [proxy, flow]>
+          #  utm-status: <value in [disable, enable]>
+          #  uuid: <value of string>
+          #  vlan-cos-fwd: <value of integer>
+          #  vlan-cos-rev: <value of integer>
+          #  vlan-filter: <value of string>
+          #  voip-profile: <value of string>
+          #  vpntunnel: <value of string>
+          #  webfilter-profile: <value of string>

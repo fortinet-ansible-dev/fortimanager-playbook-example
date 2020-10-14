@@ -1,0 +1,86 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure MMS profiles.
+     fmgr_firewall_mmsprofile:
+        bypass_validation: False
+        adom: FortiCarrier # FortiCarrier only object, need a FortiCarrier adom
+        state: present
+        firewall_mmsprofile:
+           comment: 'ansible-comment'
+           extended-utm-log: disable 
+           mm1:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - chunkedbypass
+             - clientcomfort
+             - servercomfort
+             - strict-file
+             - mms-checksum
+           mm3:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - fragmail
+             - splice
+             - mms-checksum
+           mm4:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - fragmail
+             - splice
+             - mms-checksum
+           mm7:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - chunkedbypass
+             - clientcomfort
+             - servercomfort
+             - strict-file
+             - mms-checksum
+           name: 'ansible-test'
