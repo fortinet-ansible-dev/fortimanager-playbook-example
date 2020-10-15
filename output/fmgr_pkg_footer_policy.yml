@@ -1,0 +1,25 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure IPv4 footer policies.
+     fmgr_pkg_footer_policy:
+        bypass_validation: False
+        pkg: ansible
+        state: present
+        pkg_footer_policy:
+           action: accept #<value in [deny, accept, ipsec, ...]>
+           dstaddr: gall
+           dstintf: any
+           name: ansible-test-footer
+           policyid: 1074741836 # must larger than 2^30(1074741824), since header/footer policy is a special policy
+           schedule: galways
+           service: gALL
+           srcaddr: gall
+           srcintf: any
+           status: enable

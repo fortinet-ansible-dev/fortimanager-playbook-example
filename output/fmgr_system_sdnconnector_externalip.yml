@@ -1,0 +1,17 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure GCP external IP.
+     fmgr_system_sdnconnector_externalip:
+        bypass_validation: False
+        adom: ansible
+        sdn-connector: ansible-test-sdn # name
+        state: present
+        system_sdnconnector_externalip: # available only when type is set to 'gcp' in sdn-connector
+           name: ansible-test-external

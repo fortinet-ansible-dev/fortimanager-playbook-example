@@ -1,0 +1,32 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.10.13
+# Label: FortiCarrier
+# Desc: APN.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: APN.
+     fmgr_firewall_gtp_apn:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # FortiCarrier only object, need a FortiCarrier adom
+        gtp: 'ansible-test' # name
+        state: present
+        firewall_gtp_apn:
+           action: allow #<value in [allow, deny]>
+           apnmember: 'ansible-test' # need a valid APN member
+           id: 3
+           selection-mode:
+             - ms
+             - net
+             - vrf

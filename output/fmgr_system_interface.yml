@@ -1,0 +1,23 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Interface configuration.
+     fmgr_system_interface:
+        bypass_validation: False
+        state: present
+        system_interface:
+           allowaccess:
+             - ping
+           ip: '222.222.22.2/24'
+           mtu: 1500
+           name: port4
+           serviceaccess:
+             - fgtupdates
+           speed: auto #<value in [auto, 10full, 10half, ...]>
+           status: up

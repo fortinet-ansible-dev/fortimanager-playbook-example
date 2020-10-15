@@ -1,0 +1,53 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.10.13
+# Label: system
+# Desc: Interface configuration.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Interface configuration.
+     fmgr_system_interface:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        state: present
+        system_interface:
+          #  alias: <value of string>
+           allowaccess:
+             - ping
+          #    - https
+          #    - ssh
+          #    - snmp
+          #    - http
+          #    - webservice
+          #    - https-logging
+          #  description: <value of string>
+           ip: '222.222.22.2/24'
+          #  ipv6:
+          #     ip6-address: '::/0'
+          #     ip6-allowaccess:
+          #       - ping
+          #       - https
+          #       - ssh
+          #       - snmp
+          #       - http
+          #       - webservice
+          #       - https-logging
+          #     ip6-autoconf: disable
+           mtu: 1500
+           name: port4
+           serviceaccess:
+             - fgtupdates
+          #    - fclupdates
+          #    - webfilter-antispam
+           speed: auto #<value in [auto, 10full, 10half, ...]>
+           status: up

@@ -1,0 +1,144 @@
+# Author: Xing Li
+# Org: Fortinet
+# Date: 2020.10.13
+# Label: FortiCarrier
+# Desc: Configure MMS profiles.
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+   - name: Configure MMS profiles.
+     fmgr_firewall_mmsprofile:
+        bypass_validation: False
+        # workspace_locking_adom: <value in [global, custom adom including root]>
+        # workspace_locking_timeout: 300
+        # rc_succeeded: [0, -2, -3, ...]
+        # rc_failed: [-2, -3, ...]
+        adom: FortiCarrier # FortiCarrier only object, need a FortiCarrier adom
+        state: present
+        firewall_mmsprofile:
+          #  avnotificationtable: <value of string>
+          #  bwordtable: <value of string>
+          #  carrier-endpoint-prefix: <value in [disable, enable]>
+          #  carrier-endpoint-prefix-range-max: <value of integer>
+          #  carrier-endpoint-prefix-range-min: <value of integer>
+          #  carrier-endpoint-prefix-string: <value of string>
+          #  carrierendpointbwltable: <value of string>
+           comment: 'ansible-comment'
+           extended-utm-log: disable 
+           mm1:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - chunkedbypass
+             - clientcomfort
+             - servercomfort
+             - strict-file
+             - mms-checksum
+          #  mm1-addr-hdr: <value of string>
+          #  mm1-addr-source: <value in [http-header, cookie]>
+          #  mm1-convert-hex: <value in [disable, enable]>
+          #  mm1-outbreak-prevention: <value in [disabled, files, full-archive]>
+          #  mm1-retr-dupe: <value in [disable, enable]>
+          #  mm1-retrieve-scan: <value in [disable, enable]>
+          #  mm1comfortamount: <value of integer>
+          #  mm1comfortinterval: <value of integer>
+          #  mm1oversizelimit: <value of integer>
+           mm3:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - fragmail
+             - splice
+             - mms-checksum
+          #  mm3-outbreak-prevention: <value in [disabled, files, full-archive]>
+          #  mm3oversizelimit: <value of integer>
+           mm4:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - fragmail
+             - splice
+             - mms-checksum
+          #  mm4-outbreak-prevention: <value in [disabled, files, full-archive]>
+          #  mm4oversizelimit: <value of integer>
+           mm7:
+             - avmonitor
+             - block
+             - oversize
+             - quarantine
+             - scan
+             - avquery
+             - bannedword
+             - no-content-summary
+             - archive-summary
+             - archive-full
+             - carrier-endpoint-bwl
+             - remove-blocked
+             - chunkedbypass
+             - clientcomfort
+             - servercomfort
+             - strict-file
+             - mms-checksum
+          #  mm7-addr-hdr: <value of string>
+          #  mm7-addr-source: <value in [http-header, cookie]>
+          #  mm7-convert-hex: <value in [disable, enable]>
+          #  mm7-outbreak-prevention: <value in [disabled, files, full-archive]>
+          #  mm7comfortamount: <value of integer>
+          #  mm7comfortinterval: <value of integer>
+          #  mm7oversizelimit: <value of integer>
+          #  mms-antispam-mass-log: <value in [disable, enable]>
+          #  mms-av-block-log: <value in [disable, enable]>
+          #  mms-av-oversize-log: <value in [disable, enable]>
+          #  mms-av-virus-log: <value in [disable, enable]>
+          #  mms-carrier-endpoint-filter-log: <value in [disable, enable]>
+          #  mms-checksum-log: <value in [disable, enable]>
+          #  mms-checksum-table: <value of string>
+          #  mms-notification-log: <value in [disable, enable]>
+          #  mms-web-content-log: <value in [disable, enable]>
+          #  mmsbwordthreshold: <value of integer>
+           name: 'ansible-test'
+          #  notif-msisdn:
+          #    -
+          #        msisdn: <value of string>
+          #        threshold:
+          #          - flood-thresh-1
+          #          - flood-thresh-2
+          #          - flood-thresh-3
+          #          - dupe-thresh-1
+          #          - dupe-thresh-2
+          #          - dupe-thresh-3
+          #  remove-blocked-const-length: <value in [disable, enable]>
+          #  replacemsg-group: <value of string>

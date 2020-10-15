@@ -7,11 +7,11 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
-   - name: Peer.
-     fmgr_system_ha_peer:
+   - name: Configure GCP route.
+     fmgr_system_sdnconnector_route:
         bypass_validation: False
+        adom: ansible
+        sdn-connector: ansible-test-sdn # name
         state: present
-        system_ha_peer:
-           id: 3
-           ip: '11.11.11.5' # Required, could not be 0.0.0.0
-           serial-number: FMG-VM0000000003 # need a valid serial number
+        system_sdnconnector_route: # available only when type is set to 'gcp' in sdn-connector
+           name: ansible-test-route
