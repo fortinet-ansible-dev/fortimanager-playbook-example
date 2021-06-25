@@ -1,0 +1,63 @@
+---
+- name: INSTALL PREVIEW - POLICY PACKAGE
+  hosts: fmg
+  connection: httpapi
+  collections: fortinet.fortimanager
+  vars:
+    adom: demo
+    ppkg: ppkg_hubs
+    device: fgt_00_1
+  tasks:
+    - name: Install for policy package {{ adom }}/{{ ppkg }} [preview mode]
+      fmgr_securityconsole_install_package:
+        securityconsole_install_package:
+          adom: "{{ adom }}"
+          flags:
+             - preview
+          pkg: "{{ ppkg }}"
+          scope:
+            - name: "{{ device }}"
+              vdom: root
+      register: r
+    - name: Poll the task
+      fmgr_fact:
+        facts:
+          selector: 'task_task'
+          params:
+            task: '{{ r.meta.response_data.task }}'
+      register: taskinfo
+      until: taskinfo.meta.response_data.percent == 100
+      retries: 30
+      delay: 5
+    - name: Trigger the preview report generation for policy package {{ adom }}/{{ ppkg }}
+      fmgr_securityconsole_install_preview:
+        securityconsole_install_preview:
+          adom: "{{ adom }}"
+          device: "{{ device }}"
+          flags:
+            - json
+          vdoms: root
+      register: r
+    - name: Poll the task
+      fmgr_fact:
+        facts:
+          selector: 'task_task'
+          params:
+            task: '{{ r.meta.response_data.task }}'
+      register: taskinfo
+      until: taskinfo.meta.response_data.percent == 100
+      retries: 30
+      delay: 5
+    - name: Get the preview report for policy package {{ adom }}/{{ ppkg }}
+      fmgr_securityconsole_preview_result:
+        securityconsole_preview_result:
+           adom: "{{ adom }}"
+           device: "{{ device }}"
+      register: r
+    - name: Cancel install task for policy package {{ adom }}/{{ ppkg }}
+      fmgr_securityconsole_package_cancel_install:
+        securityconsole_package_cancel_install:
+          adom: "{{ adom }}"
+    - name: Show preview report
+      debug:
+        msg: "{{ r }}"
