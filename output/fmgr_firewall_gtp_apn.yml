@@ -15,7 +15,7 @@
         state: present
         firewall_gtp_apn:
            action: allow #<value in [allow, deny]>
-           apnmember: 'ansible-test' # need a valid APN member
+           apnmember: 'ansible-test1' # need a valid APN member
            id: 3
            selection-mode:
              - ms

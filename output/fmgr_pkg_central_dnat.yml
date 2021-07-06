@@ -14,4 +14,4 @@
         pkg: ansible
         state: present
         pkg_central_dnat:
-           name: 'ansible-test-dnat' # DNAT policy has dependency with virtual IP, name must be same with a name in Virtual IPs
+           name: 'ansible-test-vip' # DNAT policy has dependency with virtual IP, name must be same with a name in Virtual IPs

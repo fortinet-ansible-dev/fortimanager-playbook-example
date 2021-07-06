@@ -15,5 +15,5 @@
            selector: 'firewall_proxyaddress_tagging'
            params:
                adom: 'ansible'
-               proxy-address: 'ansible-test1' # name
+               proxy-address: 'ansible-test' # name
                tagging: ''

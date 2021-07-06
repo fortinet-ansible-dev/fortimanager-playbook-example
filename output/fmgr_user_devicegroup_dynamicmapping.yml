@@ -7,6 +7,13 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
+   - name: Create User Device Group
+     fmgr_user_devicegroup:
+        adom: ansible
+        state: 'present'
+        user_devicegroup:
+            name: ansible-test
+
    - name: Configure dynamic mappings of device group
      fmgr_user_devicegroup_dynamicmapping:
         bypass_validation: False

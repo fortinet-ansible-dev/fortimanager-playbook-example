@@ -14,6 +14,6 @@
        facts:
            selector: 'user_group_guest' #Note: this session will been shown only if the Type parameter in User Grup is 'GUEST'
            params:
-               adom: 'ansible'
+               adom: 'FortiCarrier'
                group: 'ansible-test-group' # name
                guest: ''

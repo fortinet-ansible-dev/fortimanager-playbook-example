@@ -15,5 +15,5 @@
            selector: 'firewall_proxyaddrgrp_tagging'
            params:
                adom: 'ansible'
-               proxy-addrgrp: 'ansible-name' # name
+               proxy-addrgrp: 'ansible-test2' # name
                tagging: ''

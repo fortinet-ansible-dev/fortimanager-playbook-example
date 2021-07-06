@@ -7,6 +7,13 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
+   - name: Create the geoip
+     fmgr_system_geoipoverride:
+        adom: ansible
+        state: present
+        system_geoipoverride:
+            name: ansible-test-geoipoverride
+
    - name: Table of IP ranges assigned to country.
      fmgr_system_geoipoverride_iprange:
         bypass_validation: False

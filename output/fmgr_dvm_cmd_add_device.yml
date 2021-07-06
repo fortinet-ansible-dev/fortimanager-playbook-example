@@ -17,7 +17,7 @@
               adm_usr: admin # device user name
               ip: 0.0.0.0 # device ip
               mgmt_mode: fmg #<value in [unreg, fmg, faz, ...]>
-              name: ansible-test
+              name: FGT_AWS 
            flags:
              - none
              - create_task

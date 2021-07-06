@@ -15,4 +15,4 @@
            selector: 'firewall_identitybasedroute_rule'
            params:
                adom: 'ansible'
-               identity-based-route: 'ansible-test' # name
+               identity-based-route: '' # name

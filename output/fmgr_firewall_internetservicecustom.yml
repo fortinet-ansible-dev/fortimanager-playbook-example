@@ -7,7 +7,16 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
+   - name: Configure custom Internet Services via Generic Module.
+     fmgr_generic:
+        method: 'set'
+        params:
+            - url: '/pm/config/adom/ansible/obj/firewall/internet-service-custom'
+              data:
+                - name: 'ansible-test'
+                  comment: 'ansible-comment'
    - name: Configure custom Internet Services.
+     when: False
      fmgr_firewall_internetservicecustom:
         bypass_validation: False
         adom: ansible

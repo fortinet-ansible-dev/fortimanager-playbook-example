@@ -14,5 +14,5 @@
         state: present
         firewall_internetservicegroup:
            comment: 'ansible-comment1'
-           member: 'ansible-test' # a valid internet service name
+           #member: 'ansible-test' # a valid internet service name
            name: 'ansible-test'

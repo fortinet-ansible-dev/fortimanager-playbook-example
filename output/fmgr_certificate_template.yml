@@ -12,7 +12,7 @@
         adom: ansible
         state: present
         certificate_template:
-           digest-type: sha1
+           #digest-type: sha1
            id-type: host-ip
            key-size: 512
            key-type: rsa

@@ -15,5 +15,5 @@
            selector: 'user_fsso_dynamicmapping'
            params:
                adom: 'ansible'
-               fsso: 'ansible-fsso' # name
+               fsso: 'ansible-test-fsso' # name
                dynamic_mapping: '' 

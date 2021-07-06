@@ -16,4 +16,4 @@
            color: 1
            comment: 'ansible-comment'
            member: 'ansible-test' # need a valid proxy address name
-           name: 'ansible-test'
+           name: 'ansible-test2'

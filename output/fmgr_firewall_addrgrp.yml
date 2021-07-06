@@ -15,6 +15,6 @@
         firewall_addrgrp:
            allow-routing: disable
            color: 0
-           member: 'ansible-test' # IPv4 address name
+           member: 'ansible-test1' # IPv4 address name
            name: 'ansible-addrgrp4' # could not the same with other group, adress name, including IPv6 group and address 
            visibility: disable

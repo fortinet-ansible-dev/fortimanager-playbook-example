@@ -12,7 +12,7 @@
         bypass_validation: False
         adom: ansible
         vip6: 'ansible-test-vip6' # name
-        state: absent
+        state: present
         firewall_vip6_dynamicmapping:
            _scope:
              -

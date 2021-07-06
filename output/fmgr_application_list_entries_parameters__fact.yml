@@ -15,6 +15,6 @@
            selector: 'application_list_entries_parameters'
            params:
                adom: 'ansible'
-               list: 'ansible-test1' # name
+               list: 'ansible-test' # name
                entries: '1' # id
                parameters: ''

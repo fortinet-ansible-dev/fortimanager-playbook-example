@@ -12,7 +12,7 @@
         bypass_validation: False
         adom: ansible
         vip: 'ansible-test-vip' # name
-        state: absent
+        state: present
         firewall_vip_sslserverciphersuites:
            cipher: 'TLS-RSA-WITH-RC4-128-MD5' #<value in [TLS-RSA-WITH-RC4-128-MD5, TLS-RSA-WITH-RC4-128-SHA, TLS-RSA-WITH-DES-CBC-SHA, ...]>
            priority: 4

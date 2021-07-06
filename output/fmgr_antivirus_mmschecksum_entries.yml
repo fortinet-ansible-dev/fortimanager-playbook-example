@@ -10,9 +10,9 @@
    - name: modify this MMS content checksum list
      fmgr_antivirus_mmschecksum_entries:
         adom: FortiCarrier
-        mms-checksum: "3" # id
+        mms-checksum: "1" # id
         state: present
         antivirus_mmschecksum_entries:
-           chekcksum: 'test_checksum'
+           checksum: 'test_checksum'
            name: "entries-name"
            status: enable

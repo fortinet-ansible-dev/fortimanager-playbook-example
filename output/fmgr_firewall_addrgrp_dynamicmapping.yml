@@ -20,5 +20,5 @@
                  vdom: root # need a valid vdom name under the device
            allow-routing: disable
            color: 1
-           member: 'ansible-test'
+           member: 'ansible-test1'
            visibility: enable

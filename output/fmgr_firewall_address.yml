@@ -15,5 +15,5 @@
         firewall_address:
            allow-routing: disable
            associated-interface: any
-           name: 'ansible-test'
+           name: 'ansible-test1'
            visibility: disable

@@ -10,7 +10,7 @@
    - name: Guest User.
      fmgr_user_group_guest:
         bypass_validation: False
-        adom: ansible
+        adom: FortiCarrier
         group: ansible-test-group # name
         state: present
         user_group_guest:
