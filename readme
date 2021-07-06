@@ -1,0 +1,7 @@
+A folked branch to undertake testing againt FMG 6.0!
+
+# cd output; make
+
+# make stats
+
+# make clean
