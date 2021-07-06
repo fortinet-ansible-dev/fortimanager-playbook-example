@@ -1,5 +1,5 @@
 - name: Delete first FOS devices from FMG In a specific adom
-  hosts: fortimanager01
+  hosts: fortimanager00
   gather_facts: no
   connection: httpapi
   collections:
@@ -23,7 +23,7 @@
         msg:
          - 'We are going to delete device: {{ alldevices.meta.response_data[0].name }}'
          - 'IP of the device is: {{ alldevices.meta.response_data[0].ip }}'
-    - when: alldevices.meta.response_data != []
+    - when: alldevices.meta.response_data != [] and False
       name: Create The Task To Delete The Device
       fmgr_dvm_cmd_del_device:
         dvm_cmd_del_device:
@@ -33,7 +33,7 @@
              - 'create_task'
              - 'nonblocking'
       register: uninstalling_task
-    - when: alldevices.meta.response_data != []
+    - when: alldevices.meta.response_data != [] and False
       name: poll the task
       fmgr_fact:
         facts:
@@ -45,3 +45,4 @@
       retries: 30
       delay: 5
       failed_when: taskinfo.meta.response_data.state == 'error'
+

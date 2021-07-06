@@ -14,7 +14,7 @@
         state: present
         user_pop3:
            name: ansible-test-pop
-           port: 8000
-           secure: none #<value in [none, starttls, pop3s]>
-           server: ansible
-           ssl-min-proto-version: default #<value in [default, TLSv1, TLSv1-1, ...]>
+           #port: 8000
+           #secure: none #<value in [none, starttls, pop3s]>
+           #server: ansible
+           #ssl-min-proto-version: default #<value in [default, TLSv1, TLSv1-1, ...]>

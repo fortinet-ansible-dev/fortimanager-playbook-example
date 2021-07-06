@@ -1,5 +1,5 @@
 - name: Demo of cloning objects in FortiManager
-  hosts: fortimanager01
+  hosts: fortimanager00
   connection: httpapi
   collections:
     - fortinet.fortimanager

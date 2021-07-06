@@ -10,7 +10,7 @@
    - name: Application parameters.
      fmgr_application_list_entries_parameters:
         adom: ansible
-        list: 'ansible-test1' # name
+        list: 'ansible-test' # name
         entries: '1' # id
         state: present
         application_list_entries_parameters:

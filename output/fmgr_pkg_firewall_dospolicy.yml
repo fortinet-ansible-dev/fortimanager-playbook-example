@@ -15,6 +15,6 @@
         state: present
         pkg_firewall_dospolicy:
            comments: 'ansible-comment1'
-           interface: 'ansible-interface'
+           interface: 'sslvpn_tun_intf'
            policyid: 1
            status: enable

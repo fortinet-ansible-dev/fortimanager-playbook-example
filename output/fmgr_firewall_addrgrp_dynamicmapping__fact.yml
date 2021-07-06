@@ -15,5 +15,5 @@
            selector: 'firewall_addrgrp_dynamicmapping'
            params:
                adom: 'ansible'
-               addrgrp: 'ansible' # name
+               addrgrp: 'ansible-addrgrp4' # name
                dynamic_mapping: ''

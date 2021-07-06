@@ -7,6 +7,13 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
+   - name: Admin User
+     fmgr_system_admin_user:
+        state: present
+        system_admin_user:
+            adom: 
+             - adom-name: ansible
+            userid: 'ansible-test'
    - name: Admin domain.
      fmgr_system_admin_user_adom:
         bypass_validation: False

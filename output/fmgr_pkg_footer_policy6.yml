@@ -18,7 +18,7 @@
            dstaddr: gall
            dstintf: any
            name: ansible-test-footer
-           policyid: 1074741835 # must larger than 2^30(1074741824), since header/footer policy is a special policy
+           policyid: 1074741836 # must larger than 2^30(1074741824), since header/footer policy is a special policy
            schedule: galways
            service: gALL
            srcaddr: gall

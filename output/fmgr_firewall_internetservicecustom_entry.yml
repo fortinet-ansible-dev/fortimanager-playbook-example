@@ -14,6 +14,6 @@
         internet-service-custom: 'ansible-test' # name
         state: present
         firewall_internetservicecustom_entry:
-           dst: 'ansible'
+           #dst: 'ansible'
            id: 1
            protocol: 2

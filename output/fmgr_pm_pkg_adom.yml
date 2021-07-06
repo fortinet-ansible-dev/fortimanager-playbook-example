@@ -1,0 +1,21 @@
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+  tasks:
+  - name: create a package in a adom
+    fmgr_pm_pkg_adom:
+     adom: 'ansible'
+     pm_pkg_adom:
+         name: 'ansible'
+         type: 'pkg'
+
+  - name: create a package in global adom
+    fmgr_pm_pkg_global:
+     pm_pkg_global:
+         name: 'ansible'
+         type: 'pkg'

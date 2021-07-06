@@ -14,8 +14,8 @@
         pkg: ansible # package name
         state: present
         pkg_firewall_centralsnatmap:
-           dst-addr: 'ansible-test'
+           dst-addr: 'ansible-test1'
            nat: enable
-           orig-addr: 'ansible-test'
+           orig-addr: 'ansible-test1'
            policyid: 2
            status: disable

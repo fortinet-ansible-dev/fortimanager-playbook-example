@@ -22,8 +22,8 @@
            name: ansible-test-sysalert
            num-events: 1 #<value in [1, 5, 10, ...]>
            severity-filter: high #<value in [high, medium-high, medium, ...]>
-           severity-level-comp:
-             - <=
+           #severity-level-comp:
+           #  - <=
            severity-level-logs:
              - no-check
              - information

@@ -14,7 +14,7 @@
         state: present
         system_sdnconnector:
            azure-region: global #<value in [global, china, germany, ...]>
-           compartment-id: 1
+           #compartment-id: 1
            name: ansible-test-sdn
            password: fortinet
            server: ALL

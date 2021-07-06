@@ -15,5 +15,5 @@
            selector: 'firewall_address_dynamicmapping'
            params:
                adom: 'ansible'
-               address: 'ansible-test' # name
+               address: 'ansible-test1' # name
                dynamic_mapping: ''

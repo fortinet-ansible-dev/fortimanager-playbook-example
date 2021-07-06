@@ -11,7 +11,7 @@
      fmgr_user_fsso_dynamicmapping:
         bypass_validation: False
         adom: ansible
-        fsso: ansible-fsso # name
+        fsso: ansible-test-fsso # name
         state: present
         user_fsso_dynamicmapping:
            _scope:

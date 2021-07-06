@@ -7,9 +7,18 @@
      ansible_httpapi_validate_certs: False
      ansible_httpapi_port: 443
   tasks:
+   - name: Configure FSSO groups via fmgr_generic module.
+     fmgr_generic:
+        method: 'set'
+        params:
+            - url: '/pm/config/adom/ansible/obj/user/adgrp'
+              data:
+                - name: 'ansible-test-adgrp'
+
    - name: Configure FSSO groups.
+     when: false
      fmgr_user_adgrp:
-        bypass_validation: False
+        bypass_validation: True
         adom: ansible
         state: present
         user_adgrp:

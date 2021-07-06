@@ -14,7 +14,7 @@
         state: present
         firewall_mmsprofile:
            comment: 'ansible-comment'
-           extended-utm-log: disable 
+           #extended-utm-log: disable 
            mm1:
              - avmonitor
              - block

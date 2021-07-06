@@ -16,6 +16,6 @@
         pkg_firewall_interfacepolicy:
            address-type: ipv4 #<value in [ipv4, ipv6]>
            comments: 'ansible-comment'
-           interface: ansible-interface
+           interface: sslvpn_tun_intf
            policyid: 1
            status: enable

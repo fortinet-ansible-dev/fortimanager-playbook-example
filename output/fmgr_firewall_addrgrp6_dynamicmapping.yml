@@ -20,4 +20,5 @@
                  vdom: root # need a valid vdom name under the device
            color: 22
            comment: 'ansible-test-comment'
+           member: 'ansible-test'
            visibility: enable

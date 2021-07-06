@@ -20,4 +20,5 @@
                  vdom: root # need a valid vdom name under the device
            category: none #<value in [none, android-device, blackberry-device, ...]>
            comment: ansible-comment
+           mac: '00:11:22:33:44:55'
            type: iphone #<value in [ipad, iphone, gaming-console, ...]>
