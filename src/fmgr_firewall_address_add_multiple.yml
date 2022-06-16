@@ -1,0 +1,38 @@
+# Author: Jean-Pierre Forcioli
+# Org: Fortinet
+# Date: 2022.06.16
+# Label: firewall, address, IPv4
+# Desc: Add multiple firewall addresses
+
+- hosts: fortimanager00
+  collections:
+    - fortinet.fortimanager
+  connection: httpapi
+  vars:
+     ansible_httpapi_use_ssl: True
+     ansible_httpapi_validate_certs: False
+     ansible_httpapi_port: 443
+     description: Maintained by fortinet.fortimanager galaxy collection
+  tasks:
+    - name: Add multiple firewall addresses
+      fmgr_firewall_address:
+        bypass_validation: true
+        adom: ansible
+        state: present
+        firewall_address:
+          - name: test_host_001
+            subnet: 10.0.0.1/32
+            type: ipmask
+            color: 10
+            comment: "{{ description }}"
+          - name: test_host_002
+            subnet: 10.0.0.2/32 
+            type: ipmask
+            color: 20
+            comment: "{{ description }}"
+          - name: test_range_001
+            color: 30
+            start-ip: 10.0.0.10
+            end-ip: 10.0.0.20
+            type: iprange
+            comment: "{{ description }}"
